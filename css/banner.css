@@ -1,0 +1,60 @@
+/* Main Section Background */
+#main {
+  background-image: url('../image/bg/image-1.jpg');
+  padding-top: 100px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Banner Boxes */
+.banner1, .banner2, .banner3 {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #000;
+  position: relative;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+/* Background Images */
+.banner1 {
+  background-image: url('../asset/image/banner/1.jpeg');
+}
+
+.banner2 {
+  background-image: url('../asset/image/banner/4.jpg');
+  height: 250px;
+}
+
+.banner3 {
+  background-image: url('../asset/image/banner/2.jpg');
+  height: 250px;
+}
+
+/* Responsive Styling */
+@media (max-width: 767.98px) {
+  .banner1, .banner2, .banner3 {
+    height: auto;
+    min-height: 300px;
+    text-align: center;
+  }
+
+  .banner1 h1, .banner2 h1, .banner3 h1 {
+    font-size: 1.5rem;
+  }
+
+  .banner1 h2, .banner2 h2, .banner3 h2 {
+    font-size: 1.2rem;
+  }
+
+  .special-button {
+    margin: 0 auto;
+  }
+
+  .d-flex > .w-25 {
+    display: none; /* Hide empty image area on small screens */
+  }
+}

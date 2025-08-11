@@ -1,0 +1,161 @@
+/* Navbar container */
+.navbar {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  background-color: #fff; /* Keep white for contrast */
+  color: var(--text-color);
+  box-shadow: var(--box-shadow);
+  border-bottom: 1px solid var(--border-color);
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+/* Navbar brand (logo) */
+.navbar-brand {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  transition: color var(--transition-duration);
+  /* Align logo image vertically */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Nav links */
+.nav-link {
+  color: var(--text-color);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  transition: color var(--transition-duration), background-color var(--transition-duration);
+  font-family: "Spectral", serif;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  color: var(--primary-color);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+/* Active nav-link if you want to style it */
+.nav-link.active,
+.nav-link[aria-current="page"] {
+  color: var(--button-color);
+  font-weight: 700;
+  border-bottom: 2px solid var(--button-color);
+  font-family: "Spectral", serif;
+}
+
+/* Dropdown toggle button (styled as link) */
+.navbar-nav .dropdown button.nav-link {
+  cursor: pointer;
+  color: var(--text-color);
+  font-weight: 600;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  transition: color var(--transition-duration);
+  font-family: "Spectral", serif;
+}
+
+.navbar-nav .dropdown button.nav-link:hover,
+.navbar-nav .dropdown button.nav-link:focus,
+.navbar-nav .dropdown button.nav-link[aria-expanded="true"] {
+  color: var(--primary-color);
+  border-radius: 4px;
+  outline: none;
+}
+
+/* Dropdown caret icon */
+.navbar-nav .dropdown button.nav-link i.fa-solid {
+  margin-left: 6px;
+  font-size: 0.75em;
+  color: var(--secondary-color);
+  transition: transform var(--transition-duration);
+}
+
+.navbar-nav .dropdown.show > button.nav-link i.fa-solid {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border: 1px solid var(--border-color);
+  box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  color: var(--text-color);
+  min-width: 180px;
+  padding: 0.5rem 0;
+  border-radius: 6px;
+  background-color: #fff;
+}
+
+/* Dropdown menu items */
+.dropdown-menu .dropdown-item {
+  color: var(--text-color);
+  padding: 0.5rem 1.5rem;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+  font-family: "Spectral", serif;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: var(--primary-color);
+  color: #fff;
+  outline: none;
+}
+
+/* Responsive fix for dropdown-menu-end to align properly */
+.dropdown-menu.dropdown-menu-end {
+  right: 0;
+  left: auto;
+}
+
+/* Navbar toggler icon */
+.navbar-toggler {
+  border-color: var(--border-color);
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e");
+}
+
+/* Hover effect on navbar-toggler */
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+  text-decoration: underline;
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+/* Utility for spacing on nav items */
+.navbar-nav > li.nav-item > a.nav-link,
+.navbar-nav > li.nav-item > button.nav-link {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+/* Focus styles for accessibility */
+.nav-link:focus,
+.dropdown-item:focus,
+.navbar-toggler:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Optional: Smooth transitions for all links */
+.nav-link,
+.dropdown-item {
+  transition: color var(--transition-duration), background-color var(--transition-duration);
+}
+
