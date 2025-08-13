@@ -18,8 +18,21 @@
         <li class="nav-item">
           <a class="nav-link fw-semibold px-3" href="index.php">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link fw-semibold px-3" href="shop.php">Shop</a>
+        <!-- Account Dropdown -->
+        <li class="nav-item dropdown">
+          <button class="nav-link fw-semibold px-3"
+                  id="accountDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  style="border: none; background: transparent;">
+            Shop <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
+            <li><a class="dropdown-item" href="shop.php">View all product</a></li>
+            <?php if($user_id != '') { ?>
+              <li><a class="dropdown-item" href="add_product.php">Add product</a></li>
+            <?php } ?>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link fw-semibold px-3" href="about.php">About Us</a>
@@ -46,7 +59,7 @@
             <?php if($user_id != '') { ?>
               <li><a class="dropdown-item" href="update.php">Update</a></li>
               <li>
-                <a class="dropdown-item" href="components/user_logout.php" onclick="return confirm('Logout from this website?');">
+                <a class="dropdown-item" href="logout.php" onclick="return confirm('Logout from this website?');">
                   Logout
                 </a>
               </li>

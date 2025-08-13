@@ -9,9 +9,76 @@ if(isset($_COOKIE['user_id'])){
    header('location:login.php');
 }
 
+// select from users table
 $select_account = $conn->prepare("SELECT * FROM `users` WHERE id = ? LIMIT 1");
 $select_account->execute([$user_id]);
 $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
+
+// update user details
+if(isset($_POST['submit'])){
+
+   $name = $_POST['name'];
+   $name = filter_var($name, FILTER_SANITIZE_STRING); 
+   $number = $_POST['number'];
+   $number = filter_var($number, FILTER_SANITIZE_STRING);
+   $email = $_POST['email'];
+   $email = filter_var($email, FILTER_SANITIZE_STRING);
+   
+   if(!empty($name)){
+    $update_name = $conn->prepare("UPDATE `users` SET name = ? WHERE id = ?");
+    $update_name->execute([$name, $user_id]);
+    $success_msg[] = 'Name updated successfully!';
+   }
+
+   if(!empty($email)){
+    $verify_email = $conn->prepare("SELECT email FROM `users` WHERE email = ?");
+    $verify_email->execute([$email]);
+    if($verify_email->rowCount() > 0){
+        $warning_msg[] = 'Email already taken!';
+      }else{
+    $update_email = $conn->prepare("UPDATE `users` SET email = ? WHERE id = ?");
+    $update_email->execute([$email, $user_id]);
+    $success_msg[] = 'Email updated successfully!';
+      }
+    }
+
+    if(!empty($number)){
+      $verify_number = $conn->prepare("SELECT number FROM `users` WHERE number = ?");
+      $verify_number->execute([$number]);
+      if($verify_number->rowCount() > 0){
+         $warning_msg[] = 'Number already taken!';
+      }else{
+         $update_number = $conn->prepare("UPDATE `users` SET number = ? WHERE id = ?");
+         $update_number->execute([$number, $user_id]);
+         $success_msg[] = 'Number updated successfully!';
+      }
+    }
+
+    $empty_pass='da39a3ee5e6b4b0d3255bfef95601890afd80709';
+    $prev_pass = $fetch_account['password'];
+    $old_pass = sha1($_POST['old_pass']);
+    $old_pass = filter_var($old_pass, FILTER_SANITIZE_STRING);
+    $new_pass = sha1($_POST['new_pass']);
+    $new_pass = filter_var($new_pass, FILTER_SANITIZE_STRING);
+    $c_pass = sha1($_POST['c_pass']);
+    $c_pass = filter_var($c_pass, FILTER_SANITIZE_STRING);
+
+    if($empty_pass!=$old_pass){
+      if($old_pass != $prev_pass){
+        $warning_msg[] = 'Old password cannot be empty!';
+      }elseif($c_pass != $new_pass){
+        $warning_msg[] = 'Confirm password does not match!';
+      }else{
+        if($new_pass != $empty_pass){
+          $update_pass = $conn->prepare("UPDATE `users` SET password = ? WHERE id = ?");
+          $update_pass->execute([$c_pass, $user_id]);
+          $success_msg[] = 'Password updated successfully!';
+        }else{
+          $warning_msg[] = 'Please enter a new password!';
+        }
+    }
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,16 +119,7 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   </head>
   <body>
-    <!-- loader section start here -->
-    <div class="loading-screen">
-      <div class="loader">
-        <span>&lt;</span>
-        <span>Gemlyte IT Solutions</span>
-        <span>/&gt;</span>
-      </div>
-    </div>
-    <!-- loader section end here -->
-    <div id="main-content" style="display: none">
+    
       <?php include "components/navbar.php"; ?>
       <!-- update section start here -->
       <section class="update py-5 d-flex align-items-center">
@@ -78,7 +136,6 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
                     id="name"
                     name="name"
                     placeholder="<?php echo $fetch_account['name']; ?>"
-                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -89,7 +146,6 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
                     id="email"
                     name="email"
                     placeholder="<?php echo $fetch_account['email']; ?>"
-                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -103,7 +159,6 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
                     max="9999999999"
                     maxlength="10"
                     placeholder="<?php echo $fetch_account['number']; ?>"
-                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -114,7 +169,6 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
                     id="password"
                     name="old_pass"
                     placeholder="Enter Old Password"
-                    required
                   />
                 </div>
                 <div class="mb-3">
@@ -125,18 +179,16 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
                     id="password"
                     name="new_pass"
                     placeholder="Enter New Password"
-                    required
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="c_password" class="form-label fw-semibold">Confirm Password</label>
+                  <label for="c_password" class="form-label fw-semibold">Confirm New Password</label>
                   <input
                     type="password"
                     class="form-control form-control-lg"
                     id="c_password"
                     name="c_pass"
                     placeholder="Enter Confirm Password"
-                    required
                   />
                 </div>
                 <p class="text-center">Already have an account? <a href="login.php">Login Now!</a></p>
@@ -151,8 +203,7 @@ $fetch_account = $select_account->fetch(PDO::FETCH_ASSOC);
  
       <!-- update section end here -->
       <?php include "components/footer.php"; ?>
-    </div>
-    <script src="js/loader.js"></script>
+    
     
     <!-- SweetAlert2 CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

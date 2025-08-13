@@ -49,21 +49,10 @@ if(isset($_COOKIE['user_id'])) {
 
   </head>
   <body>
-     <!-- loader section start here -->
-    <div class="loading-screen">
-      <div class="loader">
-        <span>&lt;</span>
-        <span>Gemlyte IT Solutions</span>
-        <span>/&gt;</span>
-      </div>
-    </div>
-    <!-- loader section end here -->
-    <div id="main-content" style="display: none">
+    
       <?php include "components/navbar.php"; ?>
       <?PHP include "content/home/home-banner.php"; ?>
       <?php include "components/footer.php"; ?>
-    </div>
-    <script src="js/loader.js"></script>
     
     <!-- SweetAlert2 CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
