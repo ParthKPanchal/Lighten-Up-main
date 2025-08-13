@@ -6,6 +6,9 @@ if (isset($_COOKIE['user_id'])) {
 } else {
     $user_id = "";
 }
+//select_products
+//fetch_products
+//product_id
 
 ?>
 <!DOCTYPE html>
@@ -73,29 +76,61 @@ if (isset($_COOKIE['user_id'])) {
   <body>
       <?php include "components/navbar.php"; ?>
       <!-- shop section start here -->
-      <section class="shop py-5">
-        <div class="container my-5">
-            <h2 class="text-center mb-4">All Categories</h2>
-            <div class="product-grid">
+      <section class="shop py-5 bg-light">
+        <h2 class="text-center mb-5 fw-bold">All Products</h2>
+        <div class="container mx-5">
+          <div class="row g-4">
             <?php
-              $select_categories = $conn->prepare("SELECT * FROM `products` WHERE user_id = ? ORDER BY date DESC");
-              $select_categories->execute([$user_id]);
-              if($select_categories->rowCount()>0){
-                while($fetch_categories=$select_categories->fetch(PDO::FETCH_ASSOC)){
-              $product_id = $fetch_categories['id'];
-              if(!empty($fetch_categories['image_02'])) {
-                $image_02 = 1;
+              $select_products = $conn->prepare("SELECT * FROM `products` WHERE user_id = ? ORDER BY date DESC");
+              $select_products->execute([$user_id]);
+              if($select_products->rowCount() > 0){
+                while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
+                  $product_id = $fetch_products['id'];
+            ?>
+            <div class="col-md-6 col-lg-4 col-xl-3">
+              <form action="" method="POST" class="h-100">
+                <input type="hidden" name="product_id" value="<?= $product_id; ?>">
+
+                <div class="card shadow-sm h-100 border-0 product-card-hover">
+                  <div class="position-relative">
+                    <img src="uploaded_files/<?= $fetch_products['image_01']; ?>" 
+                        class="card-img-top rounded-top" 
+                        alt="<?= $fetch_products['product_name']; ?>" 
+                        style="height: 220px; object-fit: cover;">
+                    <span class="badge bg-dark position-absolute top-0 end-0 m-2">
+                      ₹<?= $fetch_products['product_price']; ?>
+                    </span>
+                  </div>
+
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title fw-bold"><?= $fetch_products['product_name']; ?></h5>
+                    <p class="mb-1 text-muted small">Brand: <?= $fetch_products['product_brand']; ?></p>
+                    <p class="mb-1 text-muted small">Material: <?= $fetch_products['product_material']; ?></p>
+                    <p class="mb-3 text-muted small">Manufacturer: <?= $fetch_products['product_manufacturer']; ?></p>
+
+                    <div class="mt-auto d-flex justify-content-between gap-2">
+                      <a href="update_property.php?get_id=<?= $product_id; ?>" class="btn btn-outline-dark btn-sm w-100">
+                        <i class="bi bi-pencil-square me-1"></i> Update
+                      </a>
+                      <input type="submit" name="delete_product" value="Delete" 
+                            class="btn btn-outline-danger btn-sm w-100" 
+                            onclick="return confirm('Are you sure you want to delete this product?');">
+                    </div>
+                    <a href="view_property.php?get_id=<?= $product_id; ?>" 
+                      class="btn btn-dark btn-sm mt-2 w-100">
+                      <i class="bi bi-eye me-1"></i> View Product
+                    </a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <?php
+                }
               } else {
-                $image = 'uploaded_img/default.png';
+                echo '<div class="col-12 text-center"><p class="text-muted">No products available!</p></div>';
               }
             ?>
-            <?php
-                }
-              }else{
-                  echo '<p class="empty">No products available!</p>';
-                }
-            ?>
-            </div>
+          </div>
         </div>
       </section>
 
