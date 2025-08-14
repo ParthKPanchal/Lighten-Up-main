@@ -109,7 +109,7 @@ if (isset($_COOKIE['user_id'])) {
                     <p class="mb-3 text-muted small">Manufacturer: <?= $fetch_products['product_manufacturer']; ?></p>
 
                     <div class="mt-auto d-flex justify-content-between gap-2">
-                      <a href="update_property.php?get_id=<?= $product_id; ?>" class="btn btn-outline-dark btn-sm w-100">
+                      <a href="update_product.php?get_id=<?= $product_id; ?>" class="btn btn-outline-dark btn-sm w-100">
                         <i class="bi bi-pencil-square me-1"></i> Update
                       </a>
                       <input type="submit" name="delete_product" value="Delete" 

@@ -41,41 +41,53 @@ if (isset($_GET['get_id'])) {
           $select_product = $conn->prepare("SELECT * FROM `products` WHERE id = ? LIMIT 1");
           $select_product->execute([$get_id]);
           if($select_product->rowCount() > 0) {
-
+            while($fetch_product = $select_product->fetch(PDO::FETCH_ASSOC)) {
+              $product_id = $fetch_product['id'];
+              // $product_name = $fetch_product['name'];
+              // $product_price = $fetch_product['price'];
+              // $product_color = $fetch_product['color'];
+              // $product_size = $fetch_product['size'];
+              // $product_brand = $fetch_product['brand'];
+              // $product_material = $fetch_product['material'];
+              // $product_manufacturer = $fetch_product['manufacturer'];
+              // $image_01 = $fetch_product['image_01'];
+              // $image_02 = $fetch_product['image_02'];
+              // $image_03 = $fetch_product['image_03'];
+            }
           }else{
             echo '<p class="empty">Product not found!</p>';
           }
         ?>
         <form action="" method="POST" enctype="multipart/form-data">
           <h2 class="mb-4 text-center">Add Product</h2>
-
+          <input type="hidden" name="product_id" value="<?= $product_id; ?>">
           <h4 class="mb-4 text-center">Image section</h4>
           <div class="mb-3">
             <label for="image_01" class="form-label fw-semibold">Main Image 1</label>
-            <input type="file" class="form-control form-control-lg" id="image_01" name="image_01" accept="image/*" required />
+            <input type="file" class="form-control form-control-lg" id="image_01" name="image_01" accept="image/*" required value="<?= $image_01 = $fetch_product['image_01']; ?>"/>
           </div>
           <div class="mb-3">
             <label for="image_02" class="form-label fw-semibold">Main Image 2</label>
-            <input type="file" class="form-control form-control-lg" id="image_02" name="image_02" accept="image/*" required />
+            <input type="file" class="form-control form-control-lg" id="image_02" name="image_02" accept="image/*" required value="<?= $image_02 = $fetch_product['image_02']; ?>"/>
           </div>
           <div class="mb-3">
             <label for="image_03" class="form-label fw-semibold">Main Image 3</label>
-            <input type="file" class="form-control form-control-lg" id="image_03" name="image_03" accept="image/*" required />
+            <input type="file" class="form-control form-control-lg" id="image_03" name="image_03" accept="image/*" required value="<?= $image_03 = $fetch_product['image_03']; ?>"/>
           </div> 
 
           <h4 class="mb-4 text-center">Product Details</h4>         
           <div class="mb-3">
             <label for="product_name" class="form-label fw-semibold">Product Name</label>
-            <input type="text" class="form-control form-control-lg" id="product_name" name="product_name" required/>
+            <input type="text" class="form-control form-control-lg" id="product_name" name="product_name" required value="<?= $product_name = $fetch_product['name']; ?>"/>
           </div>
           <div class="mb-3">
             <label for="product_price" class="form-label fw-semibold">Product Price</label>
-            <input type="text" class="form-control form-control-lg" id="product_price" name="product_price" required/>
+            <input type="text" class="form-control form-control-lg" id="product_price" name="product_price" required value="<?= $product_price = $fetch_product['price']; ?>"/>
           </div>
           <div class="mb-3">
             <label for="color" class="form-label fw-semibold">Select Color</label>
             <select class="form-select form-select-lg" id="color" name="color" required>
-              <option value="" disabled selected>Select Color</option>
+              <option value="<?= $product_color = $fetch_product['color']; ?>" disabled selected><?= $product_color = $fetch_product['color']; ?></option>
               <option value="red">Red</option>
               <option value="blue">Blue</option>
               <option value="yellow">Yellow</option>
@@ -87,7 +99,7 @@ if (isset($_GET['get_id'])) {
           <div class="mb-3">
             <label for="size" class="form-label fw-semibold">Select Size</label>
             <select class="form-select form-select-lg" id="size" name="size" required>
-              <option value="" disabled selected>Select Size</option>
+              <option value="<?= $product_size = $fetch_product['size']; ?>" disabled selected><?= $product_size = $fetch_product['size']; ?></option>
               <option value="size_01">48</option>
               <option value="size_02">56</option>
               <option value="size_03">60</option>
