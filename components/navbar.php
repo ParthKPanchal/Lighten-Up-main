@@ -30,6 +30,7 @@
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
             <li><a class="dropdown-item" href="shop.php">View all product</a></li>
             <?php if($user_id != '') { ?>
+              <li><a class="dropdown-item" href="my-product.php">My product</a></li>
               <li><a class="dropdown-item" href="add_product.php">Add product</a></li>
             <?php } ?>
           </ul>

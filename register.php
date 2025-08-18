@@ -105,7 +105,7 @@ if(isset($_POST['submit'])){
                   <label for="name" class="form-label fw-semibold">Full Name</label>
                   <input
                     type="text"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="name"
                     name="name"
                     placeholder="Your Full Name"
@@ -116,7 +116,7 @@ if(isset($_POST['submit'])){
                   <label for="email" class="form-label fw-semibold">Email</label>
                   <input
                     type="email"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="email"
                     name="email"
                     placeholder="you@example.com"
@@ -127,7 +127,7 @@ if(isset($_POST['submit'])){
                   <label for="number" class="form-label fw-semibold">Mobile Number</label>
                   <input
                     type="number"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="number"
                     name="number"
                     min="0"
@@ -141,7 +141,7 @@ if(isset($_POST['submit'])){
                   <label for="password" class="form-label fw-semibold">Password</label>
                   <input
                     type="password"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="password"
                     name="pass"
                     placeholder="Enter Password"
@@ -152,7 +152,7 @@ if(isset($_POST['submit'])){
                   <label for="c_password" class="form-label fw-semibold">Confirm Password</label>
                   <input
                     type="password"
-                    class="form-control form-control-lg"
+                    class="form-control"
                     id="c_password"
                     name="c_pass"
                     placeholder="Enter Confirm Password"
@@ -174,7 +174,7 @@ if(isset($_POST['submit'])){
     
     
     <!-- SweetAlert2 CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <!-- Bootstrap Bundle JS (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js" integrity="sha384-7qAoOXltbVP82dhxHAUje59V5r2YsVfBafyUDxEdApLPmcdhBPg1DKg1ERo0BZlK" crossorigin="anonymous"></script>
