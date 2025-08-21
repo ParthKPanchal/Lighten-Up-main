@@ -151,7 +151,7 @@ if(isset($_POST['delete_product'])){
                             class="btn btn-outline-danger btn-sm w-100" 
                             onclick="return confirm('Are you sure you want to delete this product?');">
                     </div>
-                    <a href="view_property.php?get_id=<?= $product_id; ?>" 
+                    <a href="view_products.php?get_id=<?= $product_id; ?>" 
                       class="btn btn-dark btn-sm mt-2 w-100">
                       <i class="bi bi-eye me-1"></i> View Product
                     </a>

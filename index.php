@@ -1,6 +1,6 @@
 <?php
 include 'connect.php';
-// this will output a unique ID of 20 characters
+
 echo create_unique_id();
 
 if(isset($_COOKIE['user_id'])) {
@@ -8,6 +8,8 @@ if(isset($_COOKIE['user_id'])) {
 } else {
     $user_id = "";
 }
+
+include 'components/save_send.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +43,7 @@ if(isset($_COOKIE['user_id'])) {
     <link rel="stylesheet" type="text/css" href="css/loader.css">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/banner.css">
+    <link rel="stylesheet" type="text/css" href="css/categories.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <!-- Google font -->
@@ -53,7 +56,8 @@ if(isset($_COOKIE['user_id'])) {
       <?php include "components/navbar.php"; ?>
       <?php include "content/home/home-banner.php"; ?>
       <?php include "content/home/home-search.php"; ?>
-      
+      <?php include "content/home/home-categories.php";?>
+      <?php include "content/home/home-show-product.php";?>
       <?php include "components/footer.php"; ?>
     
     <!-- SweetAlert2 CDN -->
@@ -66,3 +70,4 @@ if(isset($_COOKIE['user_id'])) {
     ?>
   </body>
 </html>
+ 

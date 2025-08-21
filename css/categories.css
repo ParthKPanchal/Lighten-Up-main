@@ -1,0 +1,45 @@
+/* Center and style each categories item */
+.categories {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin: 16px 0;
+}
+
+/* Image styling */
+.categories img {
+  width: 6rem;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease; /* Smooth hover zoom */
+}
+
+/* Text color change */
+.categories p {
+  margin: 0;
+  font-weight: 600;
+  color: #3069b1; /* New color */
+  transition: color 0.3s ease;
+}
+
+/* Hover effect: lift + zoom image + remove box shadow */
+.categories:hover {
+  transform: translateY(-5px);
+  box-shadow: none; /* Remove shadow on hover */
+}
+
+.categories:hover img {
+  transform: scale(1.15); /* Make image bigger */
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .categories img {
+    width: 4.5rem;
+  }
+}

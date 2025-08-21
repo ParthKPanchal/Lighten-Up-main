@@ -73,7 +73,7 @@ include 'components/save_send.php';
                         <!-- Min Price -->
                         <div class="col-lg-2 col-md-6">
                             <label class="form-label fw-semibold">Min Price</label>
-                            <select name="h_min" class="form-select" required>
+                            <select name="h_min" class="form-select">
                             <option value="" disabled selected>Select Min</option>
                             <option value="0">0</option>
                             <option value="50">50</option>
@@ -93,7 +93,7 @@ include 'components/save_send.php';
                         <!-- Max Price -->
                         <div class="col-lg-2 col-md-6">
                             <label class="form-label fw-semibold">Max Price</label>
-                            <select name="h_max" class="form-select" required>
+                            <select name="h_max" class="form-select">
                             <option value="" disabled selected>Select Max</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
@@ -195,31 +195,28 @@ include 'components/save_send.php';
              $select_products = $conn->prepare("SELECT * FROM `products` WHERE product_name LIKE '%{$h_product_name}%' AND color LIKE '%{$h_color}%' AND size LIKE '%{$h_size}%' AND product_brand LIKE '%{$h_product_brand}%' AND product_manufacturer LIKE '%{$h_product_manufacturer}%' AND product_price BETWEEN $h_min AND $h_max ORDER BY date DESC");
              $select_products->execute();
             }elseif(isset($_POST['filter_search'])){
-                $product_name=$_POST['product_name'];
+                $product_name=$_POST['h_product_name'];
                 $product_name=filter_var($product_name,FILTER_SANITIZE_STRING);
 
-                $min=$_POST['min'];
+                $min=$_POST['h_min'];
                 $min=filter_var($min,FILTER_SANITIZE_STRING);
 
-                $max=$_POST['max'];
+                $max=$_POST['h_max'];
                 $max=filter_var($max,FILTER_SANITIZE_STRING);
 
-                $color=$_POST['color'];
+                $color=$_POST['h_color'];
                 $color=filter_var($color,FILTER_SANITIZE_STRING);
 
-                $size=$_POST['size'];
+                $size=$_POST['h_size'];
                 $size=filter_var($size,FILTER_SANITIZE_STRING);
 
-                $size=$_POST['size'];
-                $size=filter_var($size,FILTER_SANITIZE_STRING);
-
-                $product_brand=$_POST['product_brand'];
+                $product_brand=$_POST['h_product_brand'];
                 $product_brand=filter_var($product_brand,FILTER_SANITIZE_STRING);
                 
-                $product_material=$_POST['product_material'];
+                $product_material=$_POST['h_product_material'];
                 $product_material=filter_var($product_material,FILTER_SANITIZE_STRING);
                 
-                $product_manufacturer=$_POST['product_manufacturer'];
+                $product_manufacturer=$_POST['h_product_manufacturer'];
                 $product_manufacturer=filter_var($product_manufacturer,FILTER_SANITIZE_STRING);
 
                 $select_products = $conn->prepare("SELECT * FROM `products` WHERE product_name LIKE '%{$product_name}%' AND color LIKE '%{$color}%' AND size LIKE '%{$size}%' AND product_brand LIKE '%{$product_brand}%' AND product_manufacturer LIKE '%{$product_manufacturer}%' AND product_price BETWEEN $min AND $max ORDER BY date DESC");
