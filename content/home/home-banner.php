@@ -1,5 +1,5 @@
 <!-- Banner Section Start -->
-<main class="container-fluid py-5" id="main">
+<main class="container-fluid py-5 px-5" id="main">
   <div class="row g-4 align-items-stretch">
 
     <!-- Left Side Banner -->

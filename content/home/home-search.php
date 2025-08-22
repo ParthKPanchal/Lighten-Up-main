@@ -1,15 +1,12 @@
 <!-- search section start here -->
 <section class="search-product py-5">
-  <div class="container-fluid">
+  <div class="container-fluid px-5">
     <div class="row justify-content-center">
       <div class="col-lg-8 col-md-10">
         <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm form-card animate-fade-up">
           <form action="search.php" method="POST" enctype="multipart/form-data">
             
             <h2 class="text-center fw-bold mb-4">Tell me what do you want?</h2>
-            
-            <!-- Specifications -->
-            <h4 class="mt-5 mb-3 text-center">Product Details</h4>
             <div class="row g-3">
               
               <!-- Product Name -->
@@ -18,7 +15,7 @@
                 <input type="text" class="form-control" name="h_product_name" placeholder="Enter product name">
               </div>
               
-              <!-- Min Price -->
+              <!-- Min Price --></div>
               <div class="col-lg-2 col-md-6">
                 <label class="form-label fw-semibold">Min Price</label>
                 <select name="h_min" class="form-select">
@@ -82,28 +79,26 @@
                   <option>60</option>
                 </select>
               </div>
-            </div>
 
-            <!-- Specifications -->
-            <h4 class="mt-5 mb-3 text-center">Product Specifications</h4>
-            <div class="row g-3">
-              <div class="col-md-4">
+              <!-- Specifications -->
+              <div class="col-lg-4 col-md-6">
                 <label class="form-label fw-semibold">Brand</label>
                 <input type="text" class="form-control" name="h_product_brand" placeholder="e.g. Philips">
               </div>
-              <div class="col-md-4">
+              <div class="col-lg-4 col-md-6">
                 <label class="form-label fw-semibold">Material</label>
                 <input type="text" class="form-control" name="h_product_material" placeholder="e.g. Plastic">
               </div>
-              <div class="col-md-4">
+              <div class="col-lg-4 col-md-6">
                 <label class="form-label fw-semibold">Manufacturer</label>
                 <input type="text" class="form-control" name="h_product_manufacturer" placeholder="e.g. Bajaj">
               </div>
             </div>
 
+            
             <div class="mt-5">
               <button type="submit" class="btn btn-dark w-100 btn-lg shadow-sm" name="h_search">
-                Search
+                Search Product
               </button>
             </div>
           </form>

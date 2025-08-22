@@ -1,6 +1,6 @@
 <!-- show product start here -->
 <section class="show-product py-5">
-  <div class="container">
+  <div class="container-fluid px-5">
     <h1 class="text-center mb-5 fw-bold">Latest Products</h1>
     <div class="row g-4">
       <?php
@@ -92,7 +92,7 @@
       <?php
           }
         }else{
-          echo '<p class="empty text-center">No products added yet! <a href="post_property.php" class="btn btn-dark ms-2">Add New</a></p>';
+          echo '<p class="empty text-center">No products added yet!</p>';
         }
       ?>
     </div>

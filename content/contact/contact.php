@@ -43,6 +43,7 @@
           <div class="col-md-6">
             <div class="bg-white p-3 p-sm-4 p-md-5 rounded-4 shadow-sm form-card animate-fade-up">
               <form>
+                <h2 class="mb-4 text-center fw-bold">Get in touch</h2>
                 <div class="mb-3">
                   <label for="name" class="form-label fw-semibold">Name</label>
                   <input
@@ -63,15 +64,37 @@
                     required
                   />
                 </div>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="subscribe" />
-                  <label class="form-check-label" for="subscribe">
-                    Subscribe
-                  </label>
+                <div class="mb-3">
+                  <label for="number" class="form-label fw-semibold">Mobile Number</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="number"
+                    name="number"
+                    min="0"
+                    max="9999999999"
+                    maxlength="10"
+                    placeholder="Enter Mobile Number"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label fw-semibold">Your Message</label>
+                  <textarea
+                    class="form-control"
+                    id="message"
+                    name="message"
+                    cols="30"
+                    rows="10"
+                    placeholder="Enter Your Message"
+                    maxlength="10000"
+                    required
+                  ></textarea>
                 </div>
                 <button
                   type="submit"
                   class="btn btn-dark w-100 btn-lg shadow-sm"
+                  name="send_message"
                 >
                   Send Message
                 </button>

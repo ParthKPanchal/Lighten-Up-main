@@ -53,276 +53,319 @@ include 'components/save_send.php';
   <body>
     
         <?php include "components/navbar.php"; ?>
-        <!-- search section start here -->
+        <!-- filter section start here -->
         <section class="filter-product py-5">
-            <div class="container-fluid">
+            <div class="container d-none d-md-block">
+                <!-- Hidden on small screens -->
                 <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
-                    <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm form-card animate-fade-up">
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        
-                        <h2 class="text-center fw-bold mb-4">Filter search</h2>
-                        <div class="row g-3">
+                    <div class="card shadow-lg border-0 rounded-4">
+                    <div class="card-body p-4 p-md-5">
+                        <h2 class="text-center mb-4 fw-bold text-dark">Filter your search?</h2>
+                        <form action="search.php" method="POST">
                         
                         <!-- Product Name -->
-                        <div class="col-lg-4 col-md-6">
-                            <label class="form-label fw-semibold">Product Name</label>
-                            <input type="text" class="form-control" name="h_product_name" placeholder="Enter product name">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Product Brand</label>
+                            <input type="text" class="form-control form-control-lg" 
+                            name="product_brand" placeholder="Enter product brand" required>
                         </div>
-                        
-                        <!-- Min Price -->
-                        <div class="col-lg-2 col-md-6">
+
+                        <!-- Price, Color, Size -->
+                        <div class="row g-3">
+                            <div class="col-md-6 col-lg-3">
                             <label class="form-label fw-semibold">Min Price</label>
-                            <select name="h_min" class="form-select">
-                            <option value="" disabled selected>Select Min</option>
-                            <option value="0">0</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            <option value="500">500</option>
-                            <option value="1000">1k</option>
-                            <option value="1500">1.5k</option>
-                            <option value="2000">2k</option>
-                            <option value="5000">5k</option>
-                            <option value="10000">10k</option>
-                            <option value="15000">15k</option>
-                            <option value="20000">20k</option>
-                            <option value="30000">30k</option>
-                        </select>
-                        </div>
-                        
-                        <!-- Max Price -->
-                        <div class="col-lg-2 col-md-6">
+                            <select name="min" class="form-select">
+                                <option value="" disabled selected>Select Min</option>
+                                <option value="0">0</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                                <option value="1500">1500</option>
+                                <option value="2000">2000</option>
+                                <option value="5000">5000</option>
+                                <option value="10000">10000</option>
+                                <option value="15000">15000</option>
+                                <option value="20000">20000</option>
+                                <option value="30000">30000</option>
+                            </select>
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
                             <label class="form-label fw-semibold">Max Price</label>
-                            <select name="h_max" class="form-select">
-                            <option value="" disabled selected>Select Max</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                            <option value="500">500</option>
-                            <option value="1000">1k</option>
-                            <option value="1500">1.5k</option>
-                            <option value="2000">2k</option>
-                            <option value="5000">5k</option>
-                            <option value="10000">10k</option>
-                            <option value="15000">15k</option>
-                            <option value="20000">20k</option>
-                            <option value="30000">30k</option>
+                            <select name="max" class="form-select">
+                                <option value="" disabled selected>Select Max</option>
+                                <option value="0">0</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
+                                <option value="1500">1500</option>
+                                <option value="2000">2000</option>
+                                <option value="5000">5000</option>
+                                <option value="10000">10000</option>
+                                <option value="15000">15000</option>
+                                <option value="20000">20000</option>
+                                <option value="30000">30000</option>
                             </select>
-                        </div>
-                        
-                        <!-- Select Color -->
-                        <div class="col-lg-2 col-md-6">
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
                             <label class="form-label fw-semibold">Select Color</label>
-                            <select class="form-select" name="h_color">
-                            <option value="" disabled selected>Select Color</option>
-                            <option>Red</option>
-                            <option>Blue</option>
-                            <option>Yellow</option>
-                            <option>Brown</option>
-                            <option>Green</option>
-                            <option>Black</option>
-                            <option>White</option>
+                            <select class="form-select" name="color">
+                                <option value="" disabled selected>Select Color</option>
+                                <option>Red</option>
+                                <option>Blue</option>
+                                <option>Yellow</option>
+                                <option>Brown</option>
+                                <option>Green</option>
+                                <option>Black</option>
+                                <option>White</option>
                             </select>
-                        </div>
-                        
-                        <!-- Select Size -->
-                        <div class="col-lg-2 col-md-6">
+                            </div>
+
+                            <div class="col-md-6 col-lg-3">
                             <label class="form-label fw-semibold">Select Size</label>
-                            <select class="form-select" name="h_size">
-                            <option value="" disabled selected>Select Size</option>
-                            <option>48</option>
-                            <option>56</option>
-                            <option>60</option>
+                            <select class="form-select" name="size">
+                                <option value="" disabled selected>Select Size</option>
+                                <option>48</option>
+                                <option>56</option>
+                                <option>60</option>
                             </select>
+                            </div>
                         </div>
 
-                        <div class="col-lg-4 col-md-6">
-                            <label class="form-label fw-semibold">Brand</label>
-                            <input type="text" class="form-control" name="h_product_brand" placeholder="e.g. Philips">
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label class="form-label fw-semibold">Material</label>
-                            <input type="text" class="form-control" name="h_product_material" placeholder="e.g. Plastic">
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <label class="form-label fw-semibold">Manufacturer</label>
-                            <input type="text" class="form-control" name="h_product_manufacturer" placeholder="e.g. Bajaj">
-                        </div>
+                        <!-- Search Button -->
+                        <div class="d-grid mt-4">
+                            <button type="submit" name="filter_search" 
+                            class="btn btn-dark btn-lg rounded-3">
+                            🔍 Filter Product
+                            </button>
                         </div>
 
-                        <div class="mt-5">
-                        <button type="submit" class="btn btn-dark w-100 btn-lg shadow-sm" name="filter_search">
-                            Search
-                        </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                     </div>
                 </div>
                 </div>
             </div>
         </section>
 
+
+        <!-- ✅ Floating Filter Icon for Mobile -->
+        <div class="d-md-none">
+            <button class="btn btn-dark rounded-2 shadow-lg position-fixed bottom-0 end-0 m-4 z-3"
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+                <i class="bi bi-filter fs-3"></i>
+            </button>
+        </div>
+
+        <!-- ✅ Offcanvas Filter Form (for mobile) -->
+        <div class="offcanvas offcanvas-bottom h-100" tabindex="-1" id="filterOffcanvas">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold">Filter your search</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <form action="search.php" method="POST">
+
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Product Brand</label>
+                <input type="text" class="form-control" name="product_brand" placeholder="Enter product brand" required>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-6">
+                <label class="form-label fw-semibold">Min Price</label>
+                <select name="min" class="form-select">
+                    <option value="" disabled selected>Select Min</option>
+                    <option value="0">0</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                </select>
+                </div>
+                <div class="col-6">
+                <label class="form-label fw-semibold">Max Price</label>
+                <select name="max" class="form-select">
+                    <option value="" disabled selected>Select Max</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                    <option value="5000">5000</option>
+                    <option value="10000">10000</option>
+                    <option value="20000">20000</option>
+                    <option value="30000">30000</option>
+                </select>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label fw-semibold">Select Color</label>
+                <select class="form-select" name="color">
+                <option value="" disabled selected>Select Color</option>
+                <option>Red</option>
+                <option>Blue</option>
+                <option>Yellow</option>
+                <option>Brown</option>
+                <option>Green</option>
+                <option>Black</option>
+                <option>White</option>
+                </select>
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label fw-semibold">Select Size</label>
+                <select class="form-select" name="size">
+                <option value="" disabled selected>Select Size</option>
+                <option>48</option>
+                <option>56</option>
+                <option>60</option>
+                </select>
+            </div>
+
+            <div class="d-grid mt-4">
+                <button type="submit" name="filter_search" class="btn btn-dark btn-lg">🔍 Apply Filter</button>
+            </div>
+
+            </form>
+        </div>
+        </div>
+
         <!-- search section start here -->
-         <div id="filter-btn" class="fas fa-filter"></div>
         <?php
-        if(isset($_POST['h_search'])) {
-            $h_product_name=$_POST['h_product_name'];
-            $h_product_name=filter_var($h_product_name,FILTER_SANITIZE_STRING);
-
-            $h_min=$_POST['h_min'];
-            $h_min=filter_var($h_min,FILTER_SANITIZE_STRING);
-
-            $h_max=$_POST['h_max'];
-            $h_max=filter_var($h_max,FILTER_SANITIZE_STRING);
-
-            $h_color=$_POST['h_color'];
-            $h_color=filter_var($h_color,FILTER_SANITIZE_STRING);
-
-            $h_size=$_POST['h_size'];
-            $h_size=filter_var($h_size,FILTER_SANITIZE_STRING);
-
-            $h_size=$_POST['h_size'];
-            $h_size=filter_var($h_size,FILTER_SANITIZE_STRING);
-
-            $h_product_brand=$_POST['h_product_brand'];
-            $h_product_brand=filter_var($h_product_brand,FILTER_SANITIZE_STRING);
+        if(isset($_POST['h_search'])){
+            $h_product_brand = isset($_POST['h_product_brand']) ? filter_var($_POST['h_product_brand'], FILTER_SANITIZE_STRING) : '';
             
-            $h_product_material=$_POST['h_product_material'];
-            $h_product_material=filter_var($h_product_material,FILTER_SANITIZE_STRING);
+            $h_min = isset($_POST['h_min']) ? filter_var($_POST['h_min'], FILTER_VALIDATE_FLOAT) : 0;
+            $h_max = isset($_POST['h_max']) ? filter_var($_POST['h_max'], FILTER_VALIDATE_FLOAT) : PHP_INT_MAX;
+
+            $h_color = isset($_POST['h_color']) ? filter_var($_POST['h_color'], FILTER_SANITIZE_STRING) : '';
+            $h_size = isset($_POST['h_size']) ? filter_var($_POST['h_size'], FILTER_SANITIZE_STRING) : '';
+
+            $select_products = $conn->prepare("SELECT * FROM products WHERE product_brand LIKE '%{$h_product_brand}%' AND color LIKE '%{$h_color}%' AND size LIKE '%{$h_size}%' AND product_price BETWEEN $h_min AND $h_max ORDER BY date DESC");
+            $select_products->execute();
+        }elseif(isset($_POST['filter_search'])){
+            $product_brand = isset($_POST['product_brand']) ? filter_var($_POST['product_brand'], FILTER_SANITIZE_STRING) : '';
             
-            $h_product_manufacturer=$_POST['h_product_manufacturer'];
-            $h_product_manufacturer=filter_var($h_product_manufacturer,FILTER_SANITIZE_STRING);
+            $min = isset($_POST['min']) ? filter_var($_POST['min'], FILTER_VALIDATE_FLOAT) : 0;
+            $max = isset($_POST['max']) ? filter_var($_POST['max'], FILTER_VALIDATE_FLOAT) : PHP_INT_MAX;
 
-             $select_products = $conn->prepare("SELECT * FROM `products` WHERE product_name LIKE '%{$h_product_name}%' AND color LIKE '%{$h_color}%' AND size LIKE '%{$h_size}%' AND product_brand LIKE '%{$h_product_brand}%' AND product_manufacturer LIKE '%{$h_product_manufacturer}%' AND product_price BETWEEN $h_min AND $h_max ORDER BY date DESC");
-             $select_products->execute();
-            }elseif(isset($_POST['filter_search'])){
-                $product_name=$_POST['h_product_name'];
-                $product_name=filter_var($product_name,FILTER_SANITIZE_STRING);
+            $color = isset($_POST['color']) ? filter_var($_POST['color'], FILTER_SANITIZE_STRING) : '';
+            $size = isset($_POST['size']) ? filter_var($_POST['size'], FILTER_SANITIZE_STRING) : '';
 
-                $min=$_POST['h_min'];
-                $min=filter_var($min,FILTER_SANITIZE_STRING);
-
-                $max=$_POST['h_max'];
-                $max=filter_var($max,FILTER_SANITIZE_STRING);
-
-                $color=$_POST['h_color'];
-                $color=filter_var($color,FILTER_SANITIZE_STRING);
-
-                $size=$_POST['h_size'];
-                $size=filter_var($size,FILTER_SANITIZE_STRING);
-
-                $product_brand=$_POST['h_product_brand'];
-                $product_brand=filter_var($product_brand,FILTER_SANITIZE_STRING);
-                
-                $product_material=$_POST['h_product_material'];
-                $product_material=filter_var($product_material,FILTER_SANITIZE_STRING);
-                
-                $product_manufacturer=$_POST['h_product_manufacturer'];
-                $product_manufacturer=filter_var($product_manufacturer,FILTER_SANITIZE_STRING);
-
-                $select_products = $conn->prepare("SELECT * FROM `products` WHERE product_name LIKE '%{$product_name}%' AND color LIKE '%{$color}%' AND size LIKE '%{$size}%' AND product_brand LIKE '%{$product_brand}%' AND product_manufacturer LIKE '%{$product_manufacturer}%' AND product_price BETWEEN $min AND $max ORDER BY date DESC");
-                $select_products->execute();
-            }else{
-                $select_products = $conn->prepare("SELECT * FROM `products` ORDER BY date DESC LIMIT 6");
-            }
-           
-          
+            $select_products = $conn->prepare("SELECT * FROM products WHERE product_brand LIKE '%{$product_brand}%' AND color LIKE '%{$color}%' AND size LIKE '%{$size}%' AND product_price BETWEEN $min AND $max ORDER BY date DESC");
+            $select_products->execute();
+        }else{
+            $select_products = $conn->prepare("SELECT * FROM `products` ORDER BY date DESC LIMIT 6");
+            $select_products->execute();
+        }
         ?>
         <!-- search section end here -->
-        
+
         <!-- show product start here -->
-        <section class="filter-product py-5">
-            <?php 
-                if(isset($_POST['h_search']) or isset($_POST['filter_search'])){
-                    echo '<h1 class="heading">search results</h1>';
-                }else{
-                    echo '<h1 class="heading">latest listings</h1>';
-                }
-            ?>
-            <div class="container">
-                <h1 class="text-center mb-5 fw-bold">Filter Products</h1>
+        <section class="show-product py-5">
+            <div class="container-fluid px-5">
+                <h1 class="text-center mb-5 fw-bold">Search Result</h1>
                 <div class="row g-4">
-                    <?php
-                        $total_images = 0;
-                        if($select_products->rowCount() > 0){
-                            while($fetch_product = $select_products->fetch(PDO::FETCH_ASSOC)){
+                <?php
+                    if($select_products->rowCount() > 0){
+                    while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
 
-                            $select_users = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-                            $select_users->execute([$fetch_product['user_id']]);
-                            $fetch_user = $select_users->fetch(PDO::FETCH_ASSOC);
+                        $select_users = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
+                        $select_users->execute([$fetch_products['user_id']]);
+                        $fetch_user = $select_users->fetch(PDO::FETCH_ASSOC);
 
-                            $image_count_02 = !empty($fetch_product['image_02']) ? 1 : 0;
-                            $image_count_03 = !empty($fetch_product['image_03']) ? 1 : 0;
-                            $total_images = (1 + $image_count_02 + $image_count_03);
+                        $image_count_02 = !empty($fetch_products['image_02']) ? 1 : 0;
+                        $image_count_03 = !empty($fetch_products['image_03']) ? 1 : 0;
+                        $total_images = (1 + $image_count_02 + $image_count_03);
 
-                            $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");
-                            $select_saved->execute([$fetch_product['id'], $user_id]);
-                    ?>
+                        $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");
+                        $select_saved->execute([$fetch_products['id'], $user_id]);
+                ?>
+                <div class="col-md-6 col-lg-4">
                     <form action="" method="POST" class="h-100">
-                        <div class="card shadow-sm border-0 h-100">
-                            <input type="hidden" name="product_id" value="<?= ($fetch_product['id']); ?>">
-                            <?php
-                                if($select_saved->rowCount() > 0){
-                            ?>
+                    <input type="hidden" name="product_id" value="<?= ($fetch_products['id']); ?>">
+                    <div class="card shadow-sm border-0 h-100">
+                        
+                        <!-- Product Image -->
+                        <div class="position-relative">
+                        <?php if(!empty($fetch_products['image_01'])): ?>
+                            <img src="uploaded_files/<?= ($fetch_products['image_01']); ?>" class="card-img-top rounded-top" alt="">
+                        <?php else: ?>
+                            <img src="asset/image/no-image.png" class="card-img-top rounded-top" alt="No image available">
+                        <?php endif; ?>
+
+                        <!-- Total Images Badge -->
+                        <span class="badge bg-dark position-absolute top-0 start-0 m-2">
+                            <i class="bi bi-image"></i> <?= $total_images; ?>
+                        </span>
+
+                        <!-- Save Button -->
+                        <?php if($select_saved->rowCount()>0){ ?>
                             <button class="btn btn-danger position-absolute top-0 end-0 m-2 rounded-2" type="submit" name="save">
                             <i class="bi bi-heart-fill"></i>
                             </button>
-                            <?php
-                                }else{ 
-                            ?>
+                        <?php } else { ?>
                             <button class="btn btn-light position-absolute top-0 end-0 m-2 rounded-2" type="submit" name="save">
-                                <i class="bi bi-heart"></i>
+                            <i class="bi bi-heart"></i>
                             </button>
-                           
-                            <?php } ?>
-                            <div class="thumb">
-                                <p class="total-images"><i class="bi bi-image"></i><span><?= $total_images; ?></span></p> 
-                                <img src="uploaded_files/<?= $fetch_property['image_01']; ?>" alt="">
-                            </div>
-                            <div class="admin">
-                                <h3><?= substr($fetch_user['name'], 0, 1); ?></h3>
-                                <div>
-                                    <p><?= $fetch_user['name']; ?></p>
-                                    <span><?= $fetch_property['date']; ?></span>
-                                </div>
-                            </div>
-                            </div>
-
-                            <!-- Card Body -->
-                            <div class="card-body d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3">
-                                <h5 class="card-title fw-bold"><?= ($fetch_product['product_name']); ?></h5>
-                            <p class="text-dark h5 mb-3"><i class="fas fa-indian-rupee-sign"></i> <?= ($fetch_product['product_price']); ?></p>
-
-                            <ul class="list-unstyled text-muted small mb-4">
-                                <li>Brand: <?= ($fetch_product['product_brand']); ?></li>
-                                <li>Material: <?= ($fetch_product['product_material']); ?></li>
-                                <li>Manufacturer: <?= ($fetch_product['product_manufacturer']); ?></li>
-                            </ul>
-                            </div>
-
-                           
-
-                            <!-- Action Buttons -->
-                            <div class="mt-auto d-flex gap-2">
-                                <a href="view_products.php?get_id=<?= ($fetch_product['id']); ?>" class="btn btn-outline-dark flex-fill">View</a>
-                                <input type="submit" value="Enquiry" name="send" class="btn btn-dark flex-fill">
-                            </div>
-                            </div>
+                        <?php } ?>
                         </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body d-flex flex-column">
+                        <div class="d-flex align-items-center mb-3">
+                            <?php if($fetch_user): ?>
+                            <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; font-weight:bold;">
+                                <?= (substr($fetch_user['name'], 0, 1)); ?>
+                            </div>
+                            <div class="ms-2">
+                                <p class="mb-0 fw-semibold"><?= ($fetch_user['name']); ?></p>
+                                <small class="text-muted"><?= ($fetch_products['date']); ?></small>
+                            </div>
+                            <?php else: ?>
+                            <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; font-weight:bold;">?</div>
+                            <div class="ms-2">
+                                <p class="mb-0 fw-semibold">Unknown</p>
+                                <small class="text-muted"><?= ($fetch_products['date']); ?></small>
+                            </div>
+                            <?php endif; ?>
+                        </div>
+
+                        <h5 class="card-title fw-bold"><?= ($fetch_products['product_brand']); ?></h5>
+                        <p class="text-dark h5 mb-3"><i class="fas fa-indian-rupee-sign"></i> <?= ($fetch_products['product_price']); ?></p>
+
+                        <ul class="list-unstyled text-muted small mb-4">
+                            <li>Brand: <?= ($fetch_products['product_brand']); ?></li>
+                            <li>Material: <?= ($fetch_products['product_material']); ?></li>
+                            <li>Manufacturer: <?= ($fetch_products['product_manufacturer']); ?></li>
+                        </ul>
+
+                        <!-- Action Buttons -->
+                        <div class="mt-auto d-flex gap-2">
+                            <a href="view_products.php?get_id=<?= ($fetch_products['id']); ?>" class="btn btn-outline-dark flex-fill">View</a>
+                            <input type="submit" value="Enquiry" name="send" class="btn btn-dark flex-fill">
+                        </div>
+                        </div>
+                    </div>
                     </form>
                 </div>
                 <?php
                     }
                     }else{
-                    echo '<p class="empty text-center">No results found!</p>';
+                    echo '<p class="empty text-center">No Result Found!</p>';
                     }
                 ?>
                 </div>
-
             </div>
         </section>
         <!-- show product end here -->
-         
+
+
         <?php include "components/footer.php"; ?>
         
     <!-- SweetAlert2 CDN -->
@@ -333,11 +376,6 @@ include 'components/save_send.php';
     <?php
     include 'components/message.php';
     ?>
-    <script>
-        let range = document.querySelector("#range");
-        range.oninput = () =>{
-            document.querySelector('#output').innerHTML = range.value;
-        }
-    </script>
+    
   </body>
 </html>

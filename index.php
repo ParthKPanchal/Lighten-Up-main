@@ -55,7 +55,108 @@ include 'components/save_send.php';
     
       <?php include "components/navbar.php"; ?>
       <?php include "content/home/home-banner.php"; ?>
-      <?php include "content/home/home-search.php"; ?>
+      <!-- search section start here -->
+      <section class="search-product py-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+              <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                  <h2 class="text-center mb-4 fw-bold text-dark">
+                    Tell me what do you want?
+                  </h2>
+                  <form action="search.php" method="POST">
+                    
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                      <label class="form-label fw-semibold">Product Brand</label>
+                      <input type="text" class="form-control form-control-lg" 
+                        name="h_product_brand" placeholder="Enter product brand" required>
+                    </div>
+
+                    <!-- Price, Color, Size -->
+                    <div class="row g-3">
+                      <div class="col-md-6 col-lg-3">
+                        <label class="form-label fw-semibold">Min Price</label>
+                        <select name="h_min" class="form-select">
+                          <option value="" disabled selected>Select Min</option>
+                          <option value="0">0</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <option value="500">500</option>
+                          <option value="1000">1000</option>
+                          <option value="1500">1500</option>
+                          <option value="2000">2000</option>
+                          <option value="5000">5000</option>
+                          <option value="10000">10000</option>
+                          <option value="15000">15000</option>
+                          <option value="20000">20000</option>
+                          <option value="30000">30000</option>
+                        </select>
+                      </div>
+                      
+                      <div class="col-md-6 col-lg-3">
+                        <label class="form-label fw-semibold">Max Price</label>
+                        <select name="h_max" class="form-select">
+                          <option value="" disabled selected>Select Max</option>
+                          <option value="0">0</option>
+                          <option value="50">50</option>
+                          <option value="100">100</option>
+                          <option value="500">500</option>
+                          <option value="1000">1000</option>
+                          <option value="1500">1500</option>
+                          <option value="2000">2000</option>
+                          <option value="5000">5000</option>
+                          <option value="10000">10000</option>
+                          <option value="15000">15000</option>
+                          <option value="20000">20000</option>
+                          <option value="30000">30000</option>
+                        </select>
+                      </div>
+                      
+                      <div class="col-md-6 col-lg-3">
+                        <label class="form-label fw-semibold">Select Color</label>
+                        <select class="form-select" name="h_color">
+                          <option value="" disabled selected>Select Color</option>
+                          <option>Red</option>
+                          <option>Blue</option>
+                          <option>Yellow</option>
+                          <option>Brown</option>
+                          <option>Green</option>
+                          <option>Black</option>
+                          <option>White</option>
+                        </select>
+                      </div>
+                      
+                      <div class="col-md-6 col-lg-3">
+                        <label class="form-label fw-semibold">Select Size</label>
+                        <select class="form-select" name="h_size">
+                          <option value="" disabled selected>Select Size</option>
+                          <option>48</option>
+                          <option>56</option>
+                          <option>60</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="d-grid mt-4">
+                      <button type="submit" name="h_search" 
+                        class="btn btn-dark btn-lg rounded-3">
+                        🔍 Search Product
+                      </button>
+                    </div>
+                    
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- search section end here -->
+
       <?php include "content/home/home-categories.php";?>
       <?php include "content/home/home-show-product.php";?>
       <?php include "components/footer.php"; ?>

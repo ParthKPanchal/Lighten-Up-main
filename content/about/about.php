@@ -1,105 +1,184 @@
-
 <!-- About Section -->
-<section class="about py-5 mt-5" id="about">
-  <div class="container-fluid text-center">
-    <h1 class="fw-bold text-dark">About Us</h1>
+<section class="py-5 bg-light" id="about">
+  <div class="container-fluid px-5">
 
-    <div class="row g-4 justify-content-center mx-5">
-      <!-- Welcome Card -->
-      <div class="col-lg-10" data-aos="fade-up">
-        <div class="about-card text-start">
-          <h3 class="fw-bold text-center">Welcome to <span>Lighten Up</span></h3>
-          <p class="fs-5 mt-3">
-            Lighten Up has been a trusted name in the electrical services industry since 2024. We are dedicated to providing high-quality, reliable, and efficient electrical solutions to our community. Our team of certified and experienced electricians is committed to ensuring the safety and satisfaction of our customers.
-          </p>
-        </div>
-      </div>
+    <!-- Title -->
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-dark">About Us</h1>
+      <p class="text-muted">Trusted since 2024 for safe, smart and reliable electrical services</p>
+    </div>
 
-      <!-- Our Values -->
-      <div class="col-lg-5" data-aos="zoom-in-up">
-        <div class="about-card h-100"> <!-- FIX: h-100 added -->
-          <div class="d-flex align-items-center mb-3">
-            <i class="bi bi-star-fill about-icon me-2"></i>
-            <h4 class="fw-bold mb-0">Our Values</h4>
+    <!-- Welcome -->
+    <div class="row justify-content-center mb-5">
+      <div class="col">
+        <div class="card shadow border-0">
+          <div class="card-body text-center">
+            <h3 class="fw-bold">Welcome to <span class="text-danger">Lighten Up</span></h3>
+            <p class="mt-3 fs-5">
+              Lighten Up has been a trusted name in the electrical services industry since 2024. 
+              We are dedicated to providing high-quality, reliable, and efficient solutions. 
+              Our certified team ensures safety, innovation, and customer satisfaction.
+            </p>
           </div>
-          <ul class="fs-5 mb-0 text-start">
-            <li><b>Quality:</b> Best materials & latest techniques.</li>
-            <li><b>Safety:</b> Industry-standard, regulation-compliant work.</li>
-            <li><b>Innovation:</b> Modern, cutting-edge tech solutions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Our Services -->
-      <div class="col-lg-5" data-aos="fade-left">
-        <div class="about-card h-100"> <!-- FIX: h-100 already present -->
-          <div class="d-flex align-items-center mb-3">
-            <i class="bi bi-lightning-charge-fill about-icon me-2"></i>
-            <h4 class="fw-bold mb-0">Our Services</h4>
-          </div>
-          <ul class="fs-5 text-start">
-            <li><b>Residential:</b> Installations, repairs & upgrades.</li>
-            <li><b>Commercial:</b> Reliable services with minimal downtime.</li>
-            <li><b>Emergency:</b> 24/7 fast-response support.</li>
-            <li><b>Efficiency:</b> Reduce energy use with smart solutions.</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Our Mission -->
-      <div class="col-lg-10" data-aos="fade-right">
-        <div class="about-card h-100">
-          <div class="d-flex align-items-center mb-3">
-            <i class="bi bi-bullseye about-icon me-2"></i>
-            <h4 class="fw-bold mb-0">Our Mission</h4>
-          </div>
-          <p class="fs-5">
-            To deliver exceptional electrical services that enhance comfort, safety, and efficiency. We build lasting client relationships through excellence and service.
-          </p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Journey Timeline Section -->
-<section class="py-5" id="journey" style="background-color: #f8f9fa;">
-  <div class="container">
-    <h2 class="text-center fw-bold mb-5">Our Journey</h2>
-    <div class="vertical-timeline">
-
-      <div class="timeline-item" data-aos="fade-up">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content shadow-sm">
-          <h5 class="fw-bold">2024 – Company Founded</h5>
-          <p>Lighten Up was established to bring safer, smarter, and more reliable electrical services to homes and businesses.</p>
+    <!-- Values & Services -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-6">
+        <div class="card shadow h-100 border-0">
+          <div class="card-body text-center text-md-start">
+            <h4 class="fw-bold mb-3"><i class="bi bi-star-fill text-warning me-2"></i>Our Values</h4>
+            <ul class="list-unstyled fs-5">
+              <li><b>Quality:</b> Best materials & latest techniques.</li>
+              <li><b>Safety:</b> Regulation-compliant work.</li>
+              <li><b>Innovation:</b> Smart, cutting-edge solutions.</li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content shadow-sm">
-          <h5 class="fw-bold">2025 – 100+ Projects Completed</h5>
-          <p>Completed over 100 successful installations and repairs across the city.</p>
+      <div class="col-md-6">
+        <div class="card shadow h-100 border-0">
+          <div class="card-body text-center text-md-start">
+            <h4 class="fw-bold mb-3"><i class="bi bi-lightning-charge-fill text-danger me-2"></i>Our Services</h4>
+            <ul class="list-unstyled fs-5">
+              <li><b>Residential:</b> Installations, repairs & upgrades.</li>
+              <li><b>Commercial:</b> Reliable services with minimal downtime.</li>
+              <li><b>Emergency:</b> 24/7 fast-response support.</li>
+              <li><b>Efficiency:</b> Energy-saving smart solutions.</li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content shadow-sm">
-          <h5 class="fw-bold">2026 – Smart Tech Integration</h5>
-          <p>Introduced smart lighting, IoT switches, and energy-efficient upgrades.</p>
-        </div>
-      </div>
-
-      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content shadow-sm">
-          <h5 class="fw-bold">2027 – Team Expansion</h5>
-          <p>Expanded our skilled team and launched 24/7 emergency services.</p>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Mission -->
+    <div class="row justify-content-center mb-5">
+      <div class="col">
+        <div class="card shadow border-0">
+          <div class="card-body text-center text-md-start">
+            <h4 class="fw-bold mb-3"><i class="bi bi-bullseye text-success me-2"></i>Our Mission</h4>
+            <p class="fs-5 mb-0">
+              To deliver exceptional electrical services that enhance comfort, safety, and efficiency. 
+              We build lasting relationships through excellence and trust.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Journey Timeline -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark">Our Journey</h2>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card border-0 shadow h-100 text-center text-md-start">
+          <div class="card-body">
+            <h5 class="fw-bold">2022 – Company Founded</h5>
+            <p>Established to bring safer, smarter, and more reliable electrical services.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card border-0 shadow h-100 text-center text-md-start">
+          <div class="card-body">
+            <h5 class="fw-bold">2023 – 100+ Projects Completed</h5>
+            <p>Delivered 100+ successful installations and repairs city-wide.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card border-0 shadow h-100 text-center text-md-start">
+          <div class="card-body">
+            <h5 class="fw-bold">2024 – Smart Tech Integration</h5>
+            <p>Introduced smart lighting, IoT switches, and energy-efficient upgrades.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6">
+        <div class="card border-0 shadow h-100 text-center text-md-start">
+          <div class="card-body">
+            <h5 class="fw-bold">2025 – Team Expansion</h5>
+            <p>Expanded our skilled team and launched 24/7 emergency services.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer Reviews -->
+    <div class="text-center my-5">
+      <h2 class="fw-bold text-dark">What Our Customers Say</h2>
+      <p class="text-muted">Trusted feedback from our happy clients</p>
+    </div>
+
+    <div id="reviewCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+
+        <!-- Review 1 -->
+        <div class="carousel-item active">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card shadow border-0 text-center p-4">
+                <div class="card-body">
+                  <p class="fs-5 fst-italic">"Lighten Up provided excellent service! 
+                    The team was professional, quick, and ensured everything was safe. 
+                    Highly recommended!"</p>
+                  <h5 class="fw-bold mt-3">– Rahul Mehta</h5>
+                  <small class="text-muted">Homeowner</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card shadow border-0 text-center p-4">
+                <div class="card-body">
+                  <p class="fs-5 fst-italic">"Their emergency response was a lifesaver! 
+                    Within an hour, our office power issue was fixed. Truly reliable."</p>
+                  <h5 class="fw-bold mt-3">– Priya Sharma</h5>
+                  <small class="text-muted">Business Owner</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="carousel-item">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card shadow border-0 text-center p-4">
+                <div class="card-body">
+                  <p class="fs-5 fst-italic">"Great work on installing smart lighting in my house. 
+                    The team was friendly and explained everything clearly."</p>
+                  <h5 class="fw-bold mt-3">– Arjun Patel</h5>
+                  <small class="text-muted">Customer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Controls -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#reviewCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#reviewCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
+      </button>
+    </div>
+
   </div>
 </section>
