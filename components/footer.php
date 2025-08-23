@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row gy-4 text-center text-md-start">
       <!-- Logo & Social Icons -->
-      <div class="col-md-3 text-center">
+      <div class="col-md-4 text-center">
         <!-- Company Logo -->
         <img src="asset/image/logo/logo.png" alt="Lighten up Logo" class="img-fluid mb-3" style="max-width: 200px;">
 
@@ -16,7 +16,7 @@
       </div>
 
       <!-- Quick Links -->
-      <div class="col-md-3 col-sm-6">
+      <div class="col-md-4 col-sm-6">
         <h5 class="mb-3">Quick Links</h5>
         <ul class="list-unstyled">
           <li><a href="index.php" class="text-dark text-decoration-none d-block mb-2">Home</a></li>
@@ -27,19 +27,8 @@
         </ul>
       </div>
 
-      <!-- Category -->
-      <div class="col-md-3 col-sm-6">
-        <h5 class="mb-3">Category</h5>
-        <ul class="list-unstyled">
-          <li><a href="shop.php" class="text-dark text-decoration-none d-block mb-2">Fan</a></li>
-          <li><a href="shop.php" class="text-dark text-decoration-none d-block mb-2">Light</a></li>
-          <li><a href="shop.php" class="text-dark text-decoration-none d-block mb-2">Switches</a></li>
-          <li><a href="shop.php" class="text-dark text-decoration-none d-block">Wires</a></li>
-        </ul>
-      </div>
-
       <!-- Customer Support -->
-      <div class="col-md-3 col-sm-12">
+      <div class="col-md-4 col-sm-12">
         <h5 class="mb-3">Customer Support</h5>
         <ul class="list-unstyled">
           <li class="mb-2"><a href="#" class="text-dark text-decoration-none"><i class="bi bi-whatsapp me-2"></i>+91 - 9324753025</a></li>

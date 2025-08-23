@@ -66,6 +66,14 @@ $email
 $number
 $message
 $verify_message
+------------------------------
+admins
+------------------------------
+$admin_id
+$select_profile
+$fetch_profile
 
-
-Testing message to check its working or not from contact us page
+// variables for database connection
+$db_name='mysql:host=localhost;dbname=u811507687_lighten_up';
+$db_user_name='ajayinfotech';
+$db_password='AjayInfoTech@9324753025';

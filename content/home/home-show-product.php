@@ -92,7 +92,8 @@
       <?php
           }
         }else{
-          echo '<p class="empty text-center">No products added yet!</p>';
+          echo '<div class="col-12"><h4 class="alert alert-secondary text-center shadow-sm">No products added yet!</h4></div>';
+          
         }
       ?>
     </div>

@@ -54,7 +54,7 @@ include 'components/save_send.php';
   <!-- Save Section Start -->
   <section class="save-product py-5">
     <div class="container-fluid px-5">
-      <h1 class="text-center mb-5 fw-bold">All Products</h1>
+      <h1 class="text-center mb-5 fw-bold">Saved Products</h1>
       <div class="row g-4">
         <?php
             $select_saved_products = $conn->prepare("
@@ -152,7 +152,7 @@ include 'components/save_send.php';
             <?php
                 }
             } else {
-                echo '<p class="empty text-center">Nothing saved yet!</p>';
+                echo '<div class="col-12"><h4 class="alert alert-secondary text-center shadow-sm">Nothing saved yet!</h4></div>';
             }
             ?>
       </div>

@@ -1,6 +1,5 @@
 <?php
 include 'connect.php';
-echo create_unique_id();
 if (isset($_COOKIE['user_id'])) {
     $user_id = $_COOKIE['user_id'];
 } else {
@@ -112,8 +111,13 @@ if(isset($_POST['delete_product'])){
       <?php include "components/navbar.php"; ?>
       <!-- shop section start here -->
       <section class="shop py-5 bg-light">
-        <h2 class="text-center mb-5 fw-bold">My Products</h2>
-        <div class="container mx-5">
+        <div class="container-fluid px-5">
+          <!-- Page Title -->
+          <div class="text-center mb-5">
+            <h2 class="fw-bold display-6 text-dark">📦 My Products</h2>
+            <p class="text-muted">Manage and update your listed products</p>
+          </div>
+
           <div class="row g-4">
             <?php
               $select_products = $conn->prepare("SELECT * FROM `products` WHERE user_id = ? ORDER BY date DESC");
@@ -122,39 +126,53 @@ if(isset($_POST['delete_product'])){
                 while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
                   $product_id = $fetch_products['id'];
             ?>
+            <!-- Product Card -->
             <div class="col-md-6 col-lg-4 col-xl-3">
               <form action="" method="POST" class="h-100">
                 <input type="hidden" name="product_id" value="<?= $product_id; ?>">
 
-                <div class="card shadow-sm h-100 border-0 product-card-hover">
+                <div class="card shadow-lg h-100 border-0 rounded-3 product-card-hover">
                   <div class="position-relative">
                     <img src="uploaded_files/<?= $fetch_products['image_01']; ?>" 
                         class="card-img-top rounded-top" 
                         alt="<?= $fetch_products['product_name']; ?>" 
                         style="height: 220px; object-fit: cover;">
-                    <span class="badge bg-dark position-absolute top-0 end-0 m-2">
+                    
+                    <!-- Price Badge -->
+                    <span class="badge bg-dark position-absolute top-0 start-0 m-2 px-3 py-2 fs-6 shadow">
                       ₹<?= $fetch_products['product_price']; ?>
                     </span>
                   </div>
 
                   <div class="card-body d-flex flex-column">
-                    <h5 class="card-title fw-bold"><?= $fetch_products['product_name']; ?></h5>
-                    <p class="mb-1 text-muted small">Brand: <?= $fetch_products['product_brand']; ?></p>
-                    <p class="mb-1 text-muted small">Material: <?= $fetch_products['product_material']; ?></p>
-                    <p class="mb-3 text-muted small">Manufacturer: <?= $fetch_products['product_manufacturer']; ?></p>
+                    <!-- Title -->
+                    <h5 class="card-title fw-bold text-dark text-truncate">
+                      <?= $fetch_products['product_name']; ?>
+                    </h5>
 
-                    <div class="mt-auto d-flex justify-content-between gap-2">
-                      <a href="update_product.php?get_id=<?= $product_id; ?>" class="btn btn-outline-dark btn-sm w-100">
-                        <i class="bi bi-pencil-square me-1"></i> Update
+                    <!-- Meta info -->
+                    <p class="mb-1 text-muted small"><i class="bi bi-tags"></i> Brand: <?= $fetch_products['product_brand']; ?></p>
+                    <p class="mb-1 text-muted small"><i class="bi bi-box"></i> Material: <?= $fetch_products['product_material']; ?></p>
+                    <p class="mb-3 text-muted small"><i class="bi bi-building"></i> Manufacturer: <?= $fetch_products['product_manufacturer']; ?></p>
+
+                    <!-- Buttons -->
+                    <div class="mt-auto">
+                      <div class="d-flex gap-2">
+                        <a href="update_product.php?get_id=<?= $product_id; ?>" 
+                          class="btn btn-outline-primary btn-sm w-100">
+                          <i class="bi bi-pencil-square me-1"></i> Update
+                        </a>
+                        <button type="submit" name="delete_product" 
+                          class="btn btn-outline-danger btn-sm w-100"
+                          onclick="return confirm('Are you sure you want to delete this product?');">
+                          <i class="bi bi-trash me-1"></i> Delete
+                        </button>
+                      </div>
+                      <a href="view_products.php?get_id=<?= $product_id; ?>" 
+                        class="btn btn-dark btn-sm mt-3 w-100">
+                        <i class="bi bi-eye me-1"></i> View Product
                       </a>
-                      <input type="submit" name="delete_product" value="Delete" 
-                            class="btn btn-outline-danger btn-sm w-100" 
-                            onclick="return confirm('Are you sure you want to delete this product?');">
                     </div>
-                    <a href="view_products.php?get_id=<?= $product_id; ?>" 
-                      class="btn btn-dark btn-sm mt-2 w-100">
-                      <i class="bi bi-eye me-1"></i> View Product
-                    </a>
                   </div>
                 </div>
               </form>
@@ -162,12 +180,13 @@ if(isset($_POST['delete_product'])){
             <?php
                 }
               } else {
-                echo '<div class="col-12 text-center"><p class="text-muted">No products available!</p></div>';
+                echo '<div class="col-12"><h4 class="alert alert-secondary text-center shadow-sm">No products available!</h4></div>';
               }
             ?>
           </div>
         </div>
       </section>
+
 
       <!-- shop section end here -->
       <?php include "components/footer.php"; ?>

@@ -60,6 +60,7 @@
             <li><a class="dropdown-item" href="login.php">Login</a></li>
             <li><a class="dropdown-item" href="register.php">Register</a></li>
             <?php if($user_id != '') { ?>
+              <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
               <li><a class="dropdown-item" href="update.php">Update</a></li>
               <li>
                 <a class="dropdown-item" href="logout.php" onclick="return confirm('Logout from this website?');">

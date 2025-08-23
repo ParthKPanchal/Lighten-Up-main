@@ -96,86 +96,100 @@ include 'components/save_send.php';
                   $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");
                   $select_saved->execute([$fetch_products['id'], $user_id]);
             ?>
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6 col-lg-4 col-xl-3">
               <form action="" method="POST" class="h-100">
                 <input type="hidden" name="product_id" value="<?= ($fetch_products['id']); ?>">
-                <div class="card shadow-sm border-0 h-100">
+                
+                <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
                   
                   <!-- Product Image -->
-                  <div class="position-relative">
+                  <div class="position-relative overflow-hidden" style="height:250px;">
                     <?php if(!empty($fetch_products['image_01'])): ?>
-                      <img src="uploaded_files/<?= ($fetch_products['image_01']); ?>" class="card-img-top rounded-top" alt="">
+                      <img src="uploaded_files/<?= ($fetch_products['image_01']); ?>" 
+                          class="w-100 h-100 object-fit-cover transition" 
+                          alt="">
                     <?php else: ?>
-                      <img src="asset/image/no-image.png" class="card-img-top rounded-top" alt="No image available">
+                      <img src="asset/image/no-image.png" 
+                          class="w-100 h-100 object-fit-cover transition" 
+                          alt="No image available">
                     <?php endif; ?>
 
-                    <!-- Total Images Badge -->
-                    <span class="badge bg-dark position-absolute top-0 start-0 m-2">
-                      <i class="bi bi-image"></i> <?= $total_images; ?>
+                    <!-- Image Count -->
+                    <span class="badge bg-dark position-absolute top-0 start-0 m-2 rounded-pill px-2">
+                      <i class="bi bi-images"></i> <?= $total_images; ?>
                     </span>
 
-                    <!-- Save Button -->
+                    <!-- Wishlist Button -->
                     <?php if($select_saved->rowCount()>0){ ?>
-                      <button class="btn btn-danger position-absolute top-0 end-0 m-2 rounded-2" type="submit" name="save">
+                      <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 rounded-circle" type="submit" name="save">
                         <i class="bi bi-heart-fill"></i>
                       </button>
                     <?php } else { ?>
-                      <button class="btn btn-light position-absolute top-0 end-0 m-2 rounded-2" type="submit" name="save">
+                      <button class="btn btn-light btn-sm position-absolute top-0 end-0 m-2 rounded-circle shadow-sm" type="submit" name="save">
                         <i class="bi bi-heart"></i>
                       </button>
                     <?php } ?>
                   </div>
 
                   <!-- Card Body -->
-                  <div class="card-body d-flex flex-column">
+                  <div class="card-body d-flex flex-column p-3">
+                    
+                    <!-- Seller Info -->
                     <div class="d-flex align-items-center mb-3">
-                      <?php if($fetch_user): ?>
-                        <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; font-weight:bold;">
-                          <?= (substr($fetch_user['name'], 0, 1)); ?>
-                        </div>
-                        <div class="ms-2">
-                          <p class="mb-0 fw-semibold"><?= ($fetch_user['name']); ?></p>
-                          <small class="text-muted"><?= ($fetch_products['date']); ?></small>
-                        </div>
-                      <?php else: ?>
-                        <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; font-weight:bold;">?</div>
-                        <div class="ms-2">
-                          <p class="mb-0 fw-semibold">Unknown</p>
-                          <small class="text-muted"><?= ($fetch_products['date']); ?></small>
-                        </div>
-                      <?php endif; ?>
+                      <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" 
+                          style="width:40px; height:40px; font-weight:bold;">
+                        <?= ($fetch_user ? substr($fetch_user['name'], 0, 1) : "?"); ?>
+                      </div>
+                      <div class="ms-2">
+                        <p class="mb-0 fw-semibold small"><?= ($fetch_user['name'] ?? "Unknown"); ?></p>
+                        <small class="text-muted"><?= ($fetch_products['date']); ?></small>
+                      </div>
                     </div>
 
-                    <h5 class="card-title fw-bold"><?= ($fetch_products['product_name']); ?></h5>
-                    <p class="text-dark h5 mb-3"><i class="fas fa-indian-rupee-sign"></i> <?= ($fetch_products['product_price']); ?></p>
+                    <!-- Product Name -->
+                    <h6 class="card-title fw-bold text-truncate"><?= ($fetch_products['product_name']); ?></h6>
+                    
+                    <!-- Price -->
+                    <p class="h5 fw-bold text-success mb-2">
+                      ₹ <?= number_format($fetch_products['product_price']); ?>
+                    </p>
 
-                    <ul class="list-unstyled text-muted small mb-4">
-                      <li>Brand: <?= ($fetch_products['product_brand']); ?></li>
-                      <li>Material: <?= ($fetch_products['product_material']); ?></li>
-                      <li>Manufacturer: <?= ($fetch_products['product_manufacturer']); ?></li>
+                    <!-- Product Specs -->
+                    <ul class="list-unstyled small text-muted mb-3">
+                      <li><span class="fw-semibold">Brand:</span> <?= ($fetch_products['product_brand']); ?></li>
+                      <li><span class="fw-semibold">Material:</span> <?= ($fetch_products['product_material']); ?></li>
+                      <li><span class="fw-semibold">Manufacturer:</span> <?= ($fetch_products['product_manufacturer']); ?></li>
                     </ul>
 
                     <!-- Action Buttons -->
                     <div class="mt-auto d-flex gap-2">
-                      <a href="view_products.php?get_id=<?= ($fetch_products['id']); ?>" class="btn btn-outline-dark flex-fill">View</a>
-                      <input type="submit" value="Enquiry" name="send" class="btn btn-dark flex-fill">
+                      <a href="view_products.php?get_id=<?= ($fetch_products['id']); ?>" 
+                        class="btn btn-outline-dark btn-sm flex-fill rounded-3">
+                        View
+                      </a>
+                      <button type="submit" name="add_to_cart" 
+                              class="btn btn-warning btn-sm flex-fill rounded-3 text-dark fw-bold">
+                        <i class="bi bi-cart-plus"></i> Add to Cart
+                      </button>
+                      <button type="submit" name="buy_now" 
+                              class="btn btn-success btn-sm flex-fill rounded-3 fw-bold">
+                        Buy Now
+                      </button>
                     </div>
                   </div>
                 </div>
               </form>
             </div>
+
             <?php
                 }
               }else{
-                echo '<p class="empty text-center">No products added yet!</p>';
+                echo '<div class="col-12"><h4 class="alert alert-secondary text-center shadow-sm">No products added yet!</h4></div>';
               }
             ?>
           </div>
 
-          <!-- View All -->
-          <div class="mt-5 text-center">
-            <a href="listings.php" class="btn btn-lg btn-dark px-5">View All</a>
-          </div>
+          
         </div>
       </section>
       <!-- shop product end here -->

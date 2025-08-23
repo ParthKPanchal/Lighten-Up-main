@@ -1,8 +1,6 @@
 <?php
 include 'connect.php';
 
-echo create_unique_id();
-
 if(isset($_COOKIE['user_id'])) {
     $user_id = $_COOKIE['user_id'];
 } else {
