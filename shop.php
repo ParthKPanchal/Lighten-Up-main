@@ -85,15 +85,15 @@ include 'components/save_send.php';
               if($select_products->rowCount() > 0){
                 while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
 
-                  $select_users = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-                  $select_users->execute([$fetch_products['user_id']]);
-                  $fetch_user = $select_users->fetch(PDO::FETCH_ASSOC);
+                  $select_admins = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
+                  $select_admins->execute([$fetch_products['admin_id']]);
+                  $fetch_user = $select_admins->fetch(PDO::FETCH_ASSOC);
 
                   $image_count_02 = !empty($fetch_products['image_02']) ? 1 : 0;
                   $image_count_03 = !empty($fetch_products['image_03']) ? 1 : 0;
                   $total_images = (1 + $image_count_02 + $image_count_03);
 
-                  $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");
+                  $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? AND user_id = ?");
                   $select_saved->execute([$fetch_products['id'], $user_id]);
             ?>
             <div class="col-md-6 col-lg-4 col-xl-3">

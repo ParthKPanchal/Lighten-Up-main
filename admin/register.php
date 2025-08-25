@@ -1,21 +1,40 @@
 <?php
+// Secure include
 include '../connect.php';
+
+// Check if admin is logged in
+if (isset($_COOKIE['admin_id'])) {
+    $admin_id = $_COOKIE['admin_id'];
+} else {
+    $admin_id = '';
+    header('location: login.php');
+    exit;
+}
 if(isset($_POST['submit'])){
+
+    $id=create_unique_id();
     $name=$_POST['name'];
     $name=filter_var($name,FILTER_SANITIZE_STRING);
     
     $pass=$_POST['pass'];
     $pass=filter_var($pass,FILTER_SANITIZE_STRING);
+
+    $c_pass=$_POST['c_pass'];
+    $c_pass=filter_var($c_pass,FILTER_SANITIZE_STRING);
     
-    $verify_admin=$conn->prepare("SELECT * From `admins` WHERE name=? AND password=? LIMIT 1");
-    $verify_admin->execute([$name,$pass]);
-    $row=$verify_admin->fetch(PDO::FETCH_ASSOC);
+    $verify_admin=$conn->prepare("SELECT * From `admins` WHERE name=? LIMIT 1");
+    $verify_admin->execute([$name]);
 
     if($verify_admin->rowCount()>0){
-        setcookie('admin_id',$row['id'],time()+60*60*24*30,'/');
-        header('location:dashboard.php');
+        $warning_msg[]='Name already taken!';
     }else{
-        $warning_msg[]='Incorrect name or password!';
+        if($c_pass!=$pass){
+            $warning_msg[]='Password not matched!';
+        }else{
+            $insert_admin=$conn->prepare("INSERT INTO `admins`(id,name,password) VALUES(?,?,?)");
+            $insert_admin->execute([$id,$name,$c_pass]);
+            $success_msg[]="New Admin Registed!";
+        }
     }
 }
 ?>
@@ -58,13 +77,14 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
+    <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
     <!-- register section start here -->
-    <section class="register min-vh-100 d-flex justify-content-center align-items-center">
+    <section class="login min-vh-100 d-flex justify-content-center align-items-center">
         <div class="container d-flex justify-content-center">
             <div class="col-md-8 col-lg-6">
                 <div class="bg-white p-3 p-sm-4 p-md-5 rounded-4 shadow-sm form-card animate-fade-up">
                     <form action="" method="POST">
-                        <h2 class="mb-4 text-center">Welcome back!</h2>
+                        <h2 class="mb-4 text-center">Create new account</h2>
                         <p class="text-center">Default name = ajayinfo | Password = Ajayinfo@123</p>
                         
                         <div class="mb-3">
@@ -94,6 +114,20 @@ if(isset($_POST['submit'])){
                                 required
                             />
                         </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label fw-semibold">Confirm Password</label>
+                            <input
+                                type="password"
+                                class="form-control"
+                                id="password"
+                                name="c_pass"
+                                placeholder="Enter Confirm Password"
+                                maxlength="20"
+                                oninput="this.value=this.value.replace(/\s/g,'')"
+                                required
+                            />
+                        </div>
                         
                         <button type="submit" class="btn btn-dark w-100 btn-lg shadow-sm" name="submit">
                             Register Now!
@@ -109,5 +143,9 @@ if(isset($_POST['submit'])){
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="../js/script.js"></script>
     <!-- Scripts -->
+      <!-- Scripts -->
+    <?php
+    include '../components/message.php';
+    ?>
     </body>
 </html>

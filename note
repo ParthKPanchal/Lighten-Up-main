@@ -70,6 +70,10 @@ $verify_message
 admins
 ------------------------------
 $admin_id
+$name
+$pass
+$c_pass
+$verify_admin
 $select_profile
 $fetch_profile
 

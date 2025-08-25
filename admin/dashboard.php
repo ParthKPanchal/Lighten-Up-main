@@ -53,41 +53,62 @@ if (isset($_COOKIE['admin_id'])) {
     <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
     <!-- dashboard section start here -->
     <section class="dashboard py-5">
+        <h1 class="text-center fw-bold mb-4">
+            <i class="bi-speedometer2 text-dark"></i> Dashboard
+        </h1>
+
         <div class="container-fluid px-5">
         <div class="row g-4">
 
             <!-- Profile Card -->
             <div class="col-md-6 col-lg-4">
-            <div class="card shadow-sm border-0 text-center h-100">
-                <div class="card-body">
-                <?php
-                $select_profile=$conn->prepare("SELECT * FROM `admins` WHERE id=? LIMIT 1");
-                $select_profile->execute([$admin_id]);
-                $fetch_profile=$select_profile->fetch(PDO::FETCH_ASSOC);
-                ?>
-                <div class="mb-3"><i class="bi bi-person-circle display-4 text-primary"></i></div>
-                <h3 class="card-title"><?= $fetch_profile['name']; ?></h3>
-                <p class="text-muted">Welcome!</p>
-                <a href="update.php" class="btn btn-outline-primary btn-sm">Update Profile</a>
+                <div class="card shadow-sm border-0 text-center h-100">
+                    <div class="card-body">
+                    <?php
+                    $select_profile=$conn->prepare("SELECT * FROM `admins` WHERE id=? LIMIT 1");
+                    $select_profile->execute([$admin_id]);
+                    $fetch_profile=$select_profile->fetch(PDO::FETCH_ASSOC);
+                    ?>
+                    <div class="mb-3"><i class="bi-person-circle display-4 text-secondary"></i></div>
+                    <h3 class="card-title"><?= $fetch_profile['name']; ?></h3>
+                    <p class="text-muted">Welcome!</p>
+                    <a href="update.php" class="btn btn-outline-dark btn-sm">Update Profile</a>
+                    </div>
                 </div>
-            </div>
             </div>
 
             <!-- Products Card -->
             <div class="col-md-6 col-lg-4">
-            <div class="card shadow-sm border-0 text-center h-100">
-                <div class="card-body">
-                <?php
-                $count_select_products=$conn->prepare("SELECT * FROM `products`");
-                $count_select_products->execute();
-                $total_products=$count_select_products->rowCount();
-                ?>
-                <div class="mb-3"><i class="bi bi-bag-check-fill display-4 text-success"></i></div>
-                <h3><?= $total_products; ?></h3>
-                <p class="text-muted">Total Products</p>
-                <a href="admin/my_product.php" class="btn btn-outline-success btn-sm">My Products</a>
+                <div class="card shadow-sm border-0 text-center h-100">
+                    <div class="card-body">
+                    <?php
+                    $count_select_products=$conn->prepare("SELECT * FROM `products`");
+                    $count_select_products->execute();
+                    $total_products=$count_select_products->rowCount();
+                    ?>
+                    <div class="mb-3"><i class="bi bi-box-seam-fill display-4 text-success"></i></div>
+                    <h3><?= $total_products; ?></h3>
+                    <p class="text-muted">Add Products</p>
+                    <a href="admin\add_product.php" class="btn btn-outline-success btn-sm">Add Products</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- Products Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm border-0 text-center h-100">
+                    <div class="card-body">
+                    <?php
+                    $count_select_products=$conn->prepare("SELECT * FROM `products`");
+                    $count_select_products->execute();
+                    $total_products=$count_select_products->rowCount();
+                    ?>
+                    <div class="mb-3"><i class="bi bi-bag-check-fill display-4 text-primary"></i></div>
+                    <h3><?= $total_products; ?></h3>
+                    <p class="text-muted">Total Products</p>
+                    <a href="my_product.php" class="btn btn-outline-primary btn-sm">My Products</a>
+                    </div>
+                </div>
             </div>
 
             <!-- Users Card -->
@@ -102,7 +123,7 @@ if (isset($_COOKIE['admin_id'])) {
                 <div class="mb-3"><i class="bi bi-people-fill display-4 text-info"></i></div>
                 <h3><?= $total_users; ?></h3>
                 <p class="text-muted">Total Customers</p>
-                <a href="admin/users.php" class="btn btn-outline-info btn-sm">View Users</a>
+                <a href="users.php" class="btn btn-outline-info btn-sm">View Users</a>
                 </div>
             </div>
             </div>
@@ -119,7 +140,7 @@ if (isset($_COOKIE['admin_id'])) {
                 <div class="mb-3"><i class="bi bi-shield-lock-fill display-4 text-warning"></i></div>
                 <h3><?= $total_admins; ?></h3>
                 <p class="text-muted">Total Admins</p>
-                <a href="admin/admins.php" class="btn btn-outline-warning btn-sm">View Admins</a>
+                <a href="admins.php" class="btn btn-outline-warning btn-sm">View Admins</a>
                 </div>
             </div>
             </div>
@@ -136,7 +157,7 @@ if (isset($_COOKIE['admin_id'])) {
                 <div class="mb-3"><i class="bi bi-envelope-fill display-4 text-danger"></i></div>
                 <h3><?= $total_messages; ?></h3>
                 <p class="text-muted">Total Messages</p>
-                <a href="admin/messages.php" class="btn btn-outline-danger btn-sm">View Messages</a>
+                <a href="messages.php" class="btn btn-outline-danger btn-sm">View Messages</a>
                 </div>
             </div>
             </div>
@@ -150,5 +171,8 @@ if (isset($_COOKIE['admin_id'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="../js/script.js"></script>
     <!-- Scripts -->
+    <?php
+    include '../components/message.php';
+    ?>
     </body>
 </html>

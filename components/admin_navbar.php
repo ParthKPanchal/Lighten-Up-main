@@ -65,7 +65,8 @@
   </div>
 
   <ul class="nav flex-column">
-    <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="bi bi-house"></i> Home</a></li>
+    <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="bi bi-speedometer2"></i> Home</a></li>
+    <li class="nav-item"><a href="add_product.php" class="nav-link"><i class="bi bi-box"></i> Add Product</a></li>
     <li class="nav-item"><a href="my_product.php" class="nav-link"><i class="bi bi-bag"></i> My Product</a></li>
     <li class="nav-item"><a href="users.php" class="nav-link"><i class="bi bi-people"></i> Users</a></li>
     <li class="nav-item"><a href="admins.php" class="nav-link"><i class="bi bi-shield-lock"></i> Admins</a></li>
@@ -77,7 +78,7 @@
   <a href="update.php" class="btn btn-outline-light w-100 mb-2">Update Profile</a>
   <a href="login.php" class="btn btn-outline-light w-100 mb-2">Login</a>
   <a href="register.php" class="btn btn-outline-light w-100 mb-2">Register</a>
-  <a href="components/admin_logout.php" class="btn btn-danger w-100" onclick="return confirm('Logout from this website?')">Logout</a>
+  <a href="admin_logout.php" class="btn btn-danger w-100" onclick="return confirm('Logout from this website?')">Logout</a>
 </div>
 
 <script>
