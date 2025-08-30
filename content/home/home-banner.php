@@ -4,16 +4,13 @@
 
     <!-- Left Side Banner -->
     <div class="col-lg-6 d-flex">
-      <div class="w-100 banner1 d-flex flex-column justify-content-center">
-        <div class="d-flex">
-          <div class="w-75">
-            <h2 class="fw-light">Call & Trade with us!</h2>
-            <h1 class="fw-light">For GST Invoice on Company A/c</h1>
-            <a class="btn btn-outline-dark mt-2">
-              <div class="text">Call Now</div>
-            </a>
-          </div>
-          <div class="w-25"></div>
+      <div class="w-100 banner1 d-flex flex-column justify-content-center text-white fade-slide-up">
+        <div class="content-box">
+          <h2 class="fw-light">Call & Trade with us!</h2>
+          <h1 class="fw-bold">For GST Invoice on Company A/c</h1>
+          <a href="contact.php" class="btn special-button mt-3">
+            <span>📞 Call Now</span>
+          </a>
         </div>
       </div>
     </div>
@@ -22,30 +19,24 @@
     <div class="col-lg-6 d-flex flex-column gap-4">
 
       <!-- Top Right Box -->
-      <div class="flex-fill banner2 d-flex flex-column justify-content-center">
-        <div class="d-flex">
-          <div class="w-75">
-            <h2 class="fw-light">Call & Trade with us!</h2>
-            <h1 class="fw-light">Best Rate for Bulk Orders</h1>
-            <a class="btn btn-outline-dark mt-2">
-              <div class="text">Call Now</div>
-            </a>
-          </div>
-          <div class="w-25"></div>
+      <div class="flex-fill banner2 d-flex flex-column justify-content-center text-white fade-slide-up">
+        <div class="content-box">
+          <h2 class="fw-light">Call & Trade with us!</h2>
+          <h1 class="fw-bold">Best Rate for Bulk Orders</h1>
+          <a href="contact.php" class="btn special-button mt-3">
+            <span>📞 Call Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Bottom Right Box -->
-      <div class="flex-fill banner3 d-flex flex-column justify-content-center">
-        <div class="d-flex">
-          <div class="w-75">
-            <h2 class="fw-light">Call & Trade with us!</h2>
-            <h1 class="fw-light">All Types of Electrical Work</h1>
-            <a class="btn btn-outline-dark mt-2">
-              <div class="text">Call Now</div>
-            </a>
-          </div>
-          <div class="w-25"></div>
+      <div class="flex-fill banner3 d-flex flex-column justify-content-center text-white fade-slide-up">
+        <div class="content-box">
+          <h2 class="fw-light">Call & Trade with us!</h2>
+          <h1 class="fw-bold">All Types of Electrical Work</h1>
+          <a href="contact.php" class="btn special-button mt-3">
+            <span>📞 Call Now</span>
+          </a>
         </div>
       </div>
 
@@ -53,3 +44,4 @@
   </div>
 </main>
 <!-- Banner Section End -->
+

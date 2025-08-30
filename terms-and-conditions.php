@@ -1,3 +1,13 @@
+<?php
+include 'connect.php';
+
+if (isset($_COOKIE['user_id'])) {
+    $user_id = $_COOKIE['user_id'];
+} else {
+    $user_id = "";
+}
+include 'components/save_send.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,12 +32,11 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/loader.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-banner.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-product.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-about.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-contact.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-categories.css" />
-    <link rel="stylesheet" type="text/css" href="css/home-view-product.css" />
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/banner.css">
+    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="css/categories.css">
+    <link rel="stylesheet" href="css/show-product.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -38,9 +47,13 @@
 
   </head>
   <body>
-    
+    <!-- Navbar section here  -->
     <?php include "components/navbar.php"; ?>
+
+    <!-- Terms cancellation policy section here -->
     <?php include "content/terms-cancellation-policy/terms-cancellation-policy.php"; ?>
+    
+    <!-- Footer section here -->
     <?php include "components/footer.php"; ?>
     
     <!-- Bootstrap Bundle JS (includes Popper) -->

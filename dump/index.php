@@ -1,0 +1,445 @@
+<?php
+include 'connect.php';
+
+// Check if user is logged in
+$user_id = isset($_COOKIE['user_id']) ? $_COOKIE['user_id'] : "";
+
+// Handle save/send/cart functionality
+include 'components/save_send.php';
+
+// Fetch latest products
+$select_products = $conn->prepare("SELECT * FROM `products` ORDER BY id DESC LIMIT 12");
+$select_products->execute();
+// --- Handle Add to Cart
+if (isset($_POST['add_to_cart'])) {
+    if ($user_id == "") {
+        // user not logged in
+        $warning_msg[] = 'Please login to add items to your cart.';
+    } else {
+        $product_id = $_POST['product_id'];
+        $quantity   = $_POST['quantity'];
+
+        // check if product already in cart
+        $check_cart = $conn->prepare("SELECT * FROM cart WHERE user_id = ? AND product_id = ?");
+        $check_cart->execute([$user_id, $product_id]);
+
+        if ($check_cart->rowCount() > 0) {
+            // already in cart, just update qty
+            $update_cart = $conn->prepare("UPDATE cart SET quantity = quantity + ? WHERE user_id = ? AND product_id = ?");
+            $update_cart->execute([$quantity, $user_id, $product_id]);
+            $success_msg[] = 'Product quantity updated in your cart!';
+        } else {
+            // insert new
+            $insert_cart = $conn->prepare("INSERT INTO cart(user_id, product_id, quantity) VALUES(?,?,?)");
+            $insert_cart->execute([$user_id, $product_id, $quantity]);
+            $success_msg[] = 'Product added to cart!';
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lighten Up - Home</title>
+
+  <!-- Meta -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Gemplyte IT Solutions" />
+  <meta name="keywords" content="Lighten Up, Gemplyte, Sample Project" />
+  <meta name="description" content="Gemplyte Sample Project" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="asset/image/logo/title.png" type="image/x-icon" />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" 
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/banner.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/categories.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <?php include "components/navbar.php"; ?>
+
+  <!-- Banner -->
+  <?php include "content/home/home-banner.php"; ?>
+  <?php include "content/home/home-search.php"; ?>
+
+    <section class="filter-product py-5">
+      <div class="container-fluid d-none d-md-block">
+        <!-- Hidden on small screens -->
+        <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+          <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4 p-md-5">
+                            <h2 class="text-center mb-4 fw-bold text-dark">Filter your search?</h2>
+                            <form action="" method="POST">
+                            
+                            <!-- Product Name -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Product Brand</label>
+                                <input type="text" class="form-control form-control-lg" 
+                                name="product_brand" placeholder="Enter product brand">
+                            </div>
+
+                            <!-- Price, Color, Size -->
+                            <div class="row g-3">
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold">Min Price</label>
+                                    <select name="min" class="form-select">
+                                        <option value="" disabled selected>Select Min</option>
+                                        <option value="0">0</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1500">1500</option>
+                                        <option value="2000">2000</option>
+                                        <option value="5000">5000</option>
+                                        <option value="10000">10000</option>
+                                        <option value="15000">15000</option>
+                                        <option value="20000">20000</option>
+                                        <option value="30000">30000</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold">Max Price</label>
+                                    <select name="max" class="form-select">
+                                        <option value="" disabled selected>Select Max</option>
+                                        <option value="0">0</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                        <option value="500">500</option>
+                                        <option value="1000">1000</option>
+                                        <option value="1500">1500</option>
+                                        <option value="2000">2000</option>
+                                        <option value="5000">5000</option>
+                                        <option value="10000">10000</option>
+                                        <option value="15000">15000</option>
+                                        <option value="20000">20000</option>
+                                        <option value="30000">30000</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold">Select Color</label>
+                                    <select class="form-select" name="color">
+                                        <option value="" disabled selected>Select Color</option>
+                                        <option>Red</option>
+                                        <option>Blue</option>
+                                        <option>Yellow</option>
+                                        <option>Brown</option>
+                                        <option>Green</option>
+                                        <option>Black</option>
+                                        <option>White</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold">Select Size</label>
+                                    <select class="form-select" name="size">
+                                        <option value="" disabled selected>Select Size</option>
+                                        <option>48</option>
+                                        <option>56</option>
+                                        <option>60</option>
+                                    </select>
+                                </div>
+
+                                <!-- Category -->
+                                <div class="col-md-6 col-lg-2">
+                                    <label class="form-label fw-semibold">Select Category</label>
+                                    <select class="form-select" name="category">
+                                        <option value="" disabled selected>Select Category</option>
+                                        <option value="Fan">Fan</option>
+                                        <option value="Light">Light</option>
+                                        <option value="Switch">Switch</option>
+                                        <option value="Wire">Wire</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Search Button -->
+                            <div class="d-grid mt-4">
+                                <button type="submit" name="filter_search" 
+                                class="btn btn-dark btn-lg rounded-3">
+                                🔍 Filter Product
+                                </button>
+                            </div>
+
+                            </form>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- ✅ Floating Filter Icon for Mobile -->
+    <div class="d-md-none">
+      <button class="btn btn-dark rounded-2 shadow-lg position-fixed bottom-0 end-0 m-4 z-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#filterOffcanvas">
+          <i class="bi bi-filter fs-3"></i>
+      </button>
+    </div>
+    <!-- ✅ Offcanvas Filter Form (for mobile) -->
+    <div class="offcanvas offcanvas-bottom h-100" tabindex="-1" id="filterOffcanvas">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-bold">Filter your search</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <form action="" method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Product Brand</label>
+            <input type="text" class="form-control" name="product_brand" placeholder="Enter product brand">
+          </div>
+          <div class="row g-3">
+            <div class="col-6">
+                        <label class="form-label fw-semibold">Min Price</label>
+                        <select name="min" class="form-select">
+                          <option value="" disabled selected>Select Min</option>
+                          <option value="0">0</option>
+                          <option value="500">500</option>
+                          <option value="1000">1000</option>
+                          <option value="5000">5000</option>
+                          <option value="10000">10000</option>
+                          <option value="20000">20000</option>
+                          <option value="30000">30000</option>
+                        </select>
+            </div>
+            <div class="col-6">
+                        <label class="form-label fw-semibold">Max Price</label>
+                        <select name="max" class="form-select">
+                          <option value="" disabled selected>Select Max</option>
+                          <option value="500">500</option>
+                          <option value="1000">1000</option>
+                          <option value="5000">5000</option>
+                          <option value="10000">10000</option>
+                          <option value="20000">20000</option>
+                          <option value="30000">30000</option>
+                        </select>
+            </div>
+          </div>
+          <!-- Category -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Select Category</label>
+            <select class="form-select" name="category">
+              <option value="" disabled selected>Select Category</option>
+              <option value="Fan">Fan</option>
+              <option value="Light">Light</option>
+              <option value="Switch">Switch</option>
+              <option value="Wire">Wire</option>
+    </div>
+          <div class="mt-3">
+            <label class="form-label fw-semibold">Select Color</label>
+            <select class="form-select" name="color">
+              <option value="" disabled selected>Select Color</option>
+              <option>Red</option>
+              <option>Blue</option>
+              <option>Yellow</option>
+              <option>Brown</option>
+              <option>Green</option>
+              <option>Black</option>
+              <option>White</option>
+            </select>
+          </div>
+          <div class="mt-3">
+            <label class="form-label fw-semibold">Select Size</label>
+            <select class="form-select" name="size">
+              <option value="" disabled selected>Select Size</option>
+              <option>48</option>
+              <option>56</option>
+              <option>60</option>
+            </select>
+          </div>
+          <div class="d-grid mt-4">
+            <button type="submit" name="filter_search" class="btn btn-dark btn-lg">🔍 Apply Filter</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- search section start here -->
+    <?php
+      if(isset($_POST['h_search'])){
+              $h_product_brand = isset($_POST['h_product_brand']) ? filter_var($_POST['h_product_brand'], FILTER_SANITIZE_STRING) : '';
+              
+              $h_min = isset($_POST['h_min']) ? filter_var($_POST['h_min'], FILTER_VALIDATE_FLOAT) : 0;
+              $h_max = isset($_POST['h_max']) ? filter_var($_POST['h_max'], FILTER_VALIDATE_FLOAT) : PHP_INT_MAX;
+              $h_category = isset($_POST['h_category']) ? filter_var($_POST['h_category'], FILTER_SANITIZE_STRING) : '';
+              $h_color = isset($_POST['h_color']) ? filter_var($_POST['h_color'], FILTER_SANITIZE_STRING) : '';
+              $h_size = isset($_POST['h_size']) ? filter_var($_POST['h_size'], FILTER_SANITIZE_STRING) : '';
+
+              $select_products = $conn->prepare("SELECT * FROM products WHERE product_brand LIKE '%{$h_product_brand}%'AND category LIKE '%{$h_category}%' AND color LIKE '%{$h_color}%' AND size LIKE '%{$h_size}%' AND product_price BETWEEN $h_min AND $h_max ORDER BY date DESC");
+              $select_products->execute();
+      }elseif(isset($_POST['filter_search'])){
+              $product_brand = isset($_POST['product_brand']) ? filter_var($_POST['product_brand'], FILTER_SANITIZE_STRING) : '';
+              
+              $min = isset($_POST['min']) ? filter_var($_POST['min'], FILTER_VALIDATE_FLOAT) : 0;
+              $max = isset($_POST['max']) ? filter_var($_POST['max'], FILTER_VALIDATE_FLOAT) : PHP_INT_MAX;
+              $category = isset($_POST['category']) ? filter_var($_POST['category'], FILTER_SANITIZE_STRING) : '';
+              $color = isset($_POST['color']) ? filter_var($_POST['color'], FILTER_SANITIZE_STRING) : '';
+              $size = isset($_POST['size']) ? filter_var($_POST['size'], FILTER_SANITIZE_STRING) : '';
+
+              $select_products = $conn->prepare("SELECT * FROM products WHERE product_brand LIKE '%{$product_brand}%' AND category LIKE '%{$category}%' AND color LIKE '%{$color}%' AND size LIKE '%{$size}%' AND product_price BETWEEN $min AND $max ORDER BY date DESC");
+              $select_products->execute();
+      }else{
+              $select_products = $conn->prepare("SELECT * FROM `products` ORDER BY date DESC LIMIT 6");
+              $select_products->execute();
+      }
+    ?>
+    <!-- search section end here -->
+    <?php include "content/home/home-categories.php"; ?>
+    <!-- show product start here -->
+    <section class="show-product py-5">
+              <div class="container-fluid px-5">
+                  <h1 class="text-center mb-5 fw-bold">Latest Product</h1>
+                  <div class="row g-4">
+                  <?php if ($select_products->rowCount() > 0): ?>
+                    <?php while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)):
+
+                      $select_admins = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
+                      $select_admins->execute([$fetch_products['admin_id']]);
+                      $fetch_user = $select_admins->fetch(PDO::FETCH_ASSOC);
+
+                      $image_count_02 = !empty($fetch_products['image_02']) ? 1 : 0;
+                      $image_count_03 = !empty($fetch_products['image_03']) ? 1 : 0;
+                      $total_images = (1 + $image_count_02 + $image_count_03);
+
+                      $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");
+                      $select_saved->execute([$fetch_products['id'], $user_id]);
+                    ?>
+                      <!-- 🔹 Product Card -->
+                      <div class="col-md-6 col-lg-4">
+                        <form action="" method="POST" class="h-100">
+                          <input type="hidden" name="product_id" value="<?= ($fetch_products['id']); ?>">
+                          <input type="hidden" name="quantity" value="1">
+
+                          <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden position-relative product-card">
+                            
+                            <!-- Product Image -->
+                            <div class="position-relative">
+                              <?php if(!empty($fetch_products['image_01'])): ?>
+                                <img src="uploaded_files/<?= ($fetch_products['image_01']); ?>" 
+                                    class="card-img-top rounded-top product-img" alt="">
+                              <?php else: ?>
+                                <img src="asset/image/no-image.png" 
+                                    class="card-img-top rounded-top product-img" alt="No image available">
+                              <?php endif; ?>
+
+                              <!-- Total Images Badge -->
+                              <span class="badge bg-dark position-absolute top-0 start-0 m-2 px-2 py-1 shadow-sm rounded-pill">
+                                <i class="bi bi-image"></i> <?= $total_images; ?>
+                              </span>
+
+                              <!-- Save Button -->
+                              <?php if($select_saved->rowCount()>0){ ?>
+                                <button class="btn btn-danger position-absolute top-0 end-0 m-2 rounded-circle shadow-sm" 
+                                        type="submit" name="save">
+                                  <i class="bi bi-heart-fill"></i>
+                                </button>
+                              <?php } else { ?>
+                                <button class="btn btn-light position-absolute top-0 end-0 m-2 rounded-circle shadow-sm" 
+                                        type="submit" name="save">
+                                  <i class="bi bi-heart"></i>
+                                </button>
+                              <?php } ?>
+                            </div>
+
+                            <!-- Card Body -->
+                            <div class="card-body d-flex flex-column">
+                              <div class="d-flex align-items-center mb-3">
+                                <?php if($fetch_user): ?>
+                                  <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" 
+                                      style="width:40px; height:40px; font-weight:bold;">
+                                    <?= (substr($fetch_user['name'], 0, 1)); ?>
+                                  </div>
+                                  <div class="ms-2">
+                                    <p class="mb-0 fw-semibold"><?= ($fetch_user['name']); ?></p>
+                                    <small class="text-muted"><?= ($fetch_products['date']); ?></small>
+                                  </div>
+                                <?php else: ?>
+                                  <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center shadow-sm" 
+                                      style="width:40px; height:40px; font-weight:bold;">?</div>
+                                  <div class="ms-2">
+                                    <p class="mb-0 fw-semibold">Unknown</p>
+                                    <small class="text-muted"><?= ($fetch_products['date']); ?></small>
+                                  </div>
+                                <?php endif; ?>
+                              </div>
+
+                              <!-- Product Details -->
+                              <h5 class="fw-bold text-truncate"><?= htmlspecialchars($fetch_products['product_name']) ?></h5>
+                              <p class="text-success fw-bold h5 mb-3"><i class="fas fa-indian-rupee-sign"></i> <?= ($fetch_products['product_price']); ?></p>
+                              <ul class="list-unstyled text-muted small mb-4">
+                                <li><strong>Brand:</strong> <?= ($fetch_products['product_brand']); ?></li>
+                                <li><strong>Material:</strong> <?= ($fetch_products['product_material']); ?></li>
+                                <li><strong>Manufacturer:</strong> <?= ($fetch_products['product_manufacturer']); ?></li>
+                              </ul>
+
+                              <!-- Action Buttons -->
+                              <div class="mt-auto d-flex gap-2">
+                                <a href="view_products.php?get_id=<?= ($fetch_products['id']); ?>" 
+                                  class="btn btn-outline-dark flex-fill rounded-3">👁 View</a>
+                                <input type="submit" value="📩 Enquiry" name="send" class="btn btn-dark flex-fill rounded-3">
+                              </div>
+
+                              <!-- Add to Cart -->
+                              <button type="submit" name="add_to_cart" 
+                                class="btn btn-warning w-100 mt-3 fw-semibold shadow-sm rounded-3">
+                                <i class="bi bi-cart me-1"></i> Add to Cart
+                              </button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+                    <?php endwhile; ?>
+                  <?php else: ?>
+                    <div class="col-12">
+                      <h4 class="alert alert-dark text-center shadow-sm">No Result Found!</h4>
+                    </div>
+                  <?php endif; ?>
+                </div>
+                <!-- View All -->
+                <div class="mt-5 text-center">
+                  <a href="shop.php" class="btn btn-lg btn-dark px-5">View All</a>
+                </div>
+              </div>
+    </section>
+    <!-- show product end here -->
+
+  <!-- Footer -->
+  <?php include "components/footer.php"; ?>
+
+  
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.min.js"></script>
+
+  <?php include 'components/message.php'; ?>
+</body>
+</html>

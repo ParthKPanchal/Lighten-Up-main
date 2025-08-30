@@ -64,6 +64,7 @@ if(isset($_POST['submit'])){
   <link rel="stylesheet" type="text/css" href="../css/loader.css">
   <link rel="stylesheet" type="text/css" href="../css/home-banner.css">
   <link rel="stylesheet" type="text/css" href="../css/home-product.css">
+  <link rel="stylesheet" href="../css/admin_navbar.css">
   <link rel="stylesheet" type="text/css" href="../css/home-about.css">
   <link rel="stylesheet" type="text/css" href="../css/home-contact.css">
   <link rel="stylesheet" type="text/css" href="../css/home-categories.css">

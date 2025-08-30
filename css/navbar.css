@@ -146,12 +146,12 @@
 }
 
 /* Focus styles for accessibility */
-.nav-link:focus,
+/* .nav-link:focus,
 .dropdown-item:focus,
 .navbar-toggler:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
-}
+} */
 
 /* Optional: Smooth transitions for all links */
 .nav-link,

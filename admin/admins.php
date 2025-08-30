@@ -30,120 +30,42 @@ if(isset($_POST['delete'])){
 <html lang="en">
 <head>
   <title>Lighten Up - Admins</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta name="author" content="Gemplyte IT Solutions">
-  <meta name="keywords" content="Lighten Up,Gemplyte,Sample Project">
-  <meta name="description" content="Gemplyte Sample Project">
+  <!-- Meta -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Gemplyte IT Solutions" />
+  <meta name="keywords" content="Lighten Up, Gemplyte, Sample Project" />
+  <meta name="description" content="Gemplyte Sample Project" />
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="image/logo/title.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../asset/image/logo/title.png" type="image/x-icon" />
 
-  <!-- Bootstrap Icons & CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="../css/loader.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-banner.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-product.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-about.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-contact.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-categories.css">
-  <link rel="stylesheet" type="text/css" href="../css/home-view-product.css">
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" href="../css/loader.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/admin_navbar.css">
+  <link rel="stylesheet" href="../css/banner.css">
+  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="../css/categories.css">
+  <link rel="stylesheet" href="../css/show-product.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
-
-<section class="container-fluid px-5 my-5">
-  <h1 class="text-center fw-bold mb-5">
-    <i class="bi bi-shield-lock-fill text-dark"></i> Manage Admins
-  </h1>
-
-
-  <!-- Search Form -->
-  <form action="" method="POST" class="row g-2 mb-5 justify-content-center">
-    <div class="col">
-    <input type="text" name="search_box" placeholder="Search admins..." 
-           class="form-control" required>
-    </div>
-    <div class="col-auto">
-      <button type="submit" class="btn btn-dark" name="search_btn">
-        <i class="bi bi-search"></i> Search
-      </button>
-    </div>
-  </form>
-
-  <?php
-      // Fetch logged-in admin first
-      $my_admin = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
-      $my_admin->execute([$admin_id]);
-      $my_data = $my_admin->fetch(PDO::FETCH_ASSOC);
-  ?>
-  <!-- My Account Card -->
-  <div class="card shadow-lg border-0 mb-5">
-    <div class="card-body text-center bg-light">
-      <i class="bi bi-person-circle display-4 text-dark mb-3"></i>
-      <h4 class="fw-bold"><?= htmlspecialchars($my_data['name']); ?> (You)</h4>
-      <p class="text-muted">This is your account</p>
-      <div class="d-flex justify-content-center gap-2">
-        <a href="update.php" class="btn btn-dark">
-          <i class="bi bi-pencil-square"></i> Update Account
-        </a>
-        <a href="register.php" class="btn btn-dark">
-          <i class="bi bi-person-plus"></i> Register New
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <h3 class="fw-bold mb-4">Other Admins</h3>
-  <div class="row g-4">
-    <?php
-      // Search query
-      if(isset($_POST['search_box']) || isset($_POST['search_btn'])){
-         $search_box = $_POST['search_box'];
-         $search_box = filter_var($search_box, FILTER_SANITIZE_STRING);
-         $select_admins = $conn->prepare("SELECT * FROM `admins` WHERE name LIKE ? AND id != ?");
-         $select_admins->execute(["%$search_box%", $admin_id]);
-      }else{
-         $select_admins = $conn->prepare("SELECT * FROM `admins` WHERE id != ?");
-         $select_admins->execute([$admin_id]);
-      }
-
-      if($select_admins->rowCount() > 0){
-         while($fetch_admins = $select_admins->fetch(PDO::FETCH_ASSOC)){
-    ?>
-    <div class="col-md-4">
-      <div class="card shadow-sm border-0 h-100">
-        <div class="card-body text-center">
-          <i class="bi bi-person-fill display-5 text-secondary mb-3"></i>
-          <h5 class="card-title"><?= htmlspecialchars($fetch_admins['name']); ?></h5>
-          <form action="" method="POST" onsubmit="return confirm('Delete this admin?');">
-            <input type="hidden" name="delete_id" value="<?= $fetch_admins['id']; ?>">
-            <button type="submit" name="delete" class="btn btn-dark w-100">
-              <i class="bi bi-trash"></i> Delete Admin
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <?php
-         }
-      } elseif(isset($_POST['search_box']) || isset($_POST['search_btn'])) {
-         echo '<p class="text-center text-muted">No results found!</p>';
-      } else {
-    ?>
-      <p class="text-center text-muted">No other admins added yet!</p>
-    <?php } ?>
-  </div>
-</section>
+<?php include __DIR__ . '/../content/admin/admins/admins.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <?php include '../components/message.php'; ?>

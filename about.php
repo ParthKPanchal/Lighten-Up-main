@@ -40,8 +40,6 @@ include 'components/save_send.php';
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="css/loader.css">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
-    <link rel="stylesheet" type="text/css" href="css/banner.css">
-    <link rel="stylesheet" type="text/css" href="css/categories.css">
     <link rel="stylesheet" type="text/css" href="css/style.css" />
 
     <!-- Google font -->

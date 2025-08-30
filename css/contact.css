@@ -1,0 +1,39 @@
+/* Smooth fade-in for offer card */
+.animate-offer {
+  animation: fadeSlideUp 0.8s ease-in-out;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Map hover effect */
+.map-container {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.map-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Input focus glow effect */
+.fancy-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 8px rgba(13, 110, 253, 0.4);
+  transition: 0.2s;
+}
+
+/* Button hover scale */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+.hover-scale:hover {
+  transform: scale(1.03);
+}

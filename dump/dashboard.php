@@ -51,6 +51,7 @@ if (isset($_COOKIE['admin_id'])) {
 </head>
 <body>
     <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
+    <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
     <!-- dashboard section start here -->
     <section class="dashboard py-5">
         <h1 class="text-center fw-bold mb-4">
@@ -78,18 +79,35 @@ if (isset($_COOKIE['admin_id'])) {
             </div>
 
             <!-- Products Card -->
-            <div class="col-md-6 col-lg-4">
+            <!-- <div class="col-md-6 col-lg-4">
                 <div class="card shadow-sm border-0 text-center h-100">
                     <div class="card-body">
                     <?php
-                    $count_select_products=$conn->prepare("SELECT * FROM `products`");
-                    $count_select_products->execute();
-                    $total_products=$count_select_products->rowCount();
+                    // $count_select_products=$conn->prepare("SELECT * FROM `products`");
+                    // $count_select_products->execute();
+                    // $total_products=$count_select_products->rowCount();
                     ?>
                     <div class="mb-3"><i class="bi bi-box-seam-fill display-4 text-success"></i></div>
                     <h3><?= $total_products; ?></h3>
                     <p class="text-muted">Add Products</p>
-                    <a href="admin\add_product.php" class="btn btn-outline-success btn-sm">Add Products</a>
+                    <a href="add_product.php" class="btn btn-outline-success btn-sm">Add Products</a>
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- Products Card -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm border-0 text-center h-100">
+                    <div class="card-body">
+                    <?php
+                    $count_requests_received = $conn->prepare("SELECT * FROM `requests` WHERE receiver = ?");
+                    $count_requests_received->execute([$admin_id]);
+                    $total_requests_received = $count_requests_received->rowCount();
+                    ?>
+                    <div class="mb-3"><i class="bi bi-box-seam-fill display-4 text-success"></i></div>
+                    <h3><?= $total_requests_received; ?></h3>
+                    <p class="text-muted">Add Products</p>
+                    <a href="requests.php" class="btn btn-outline-success btn-sm">View Requests</a>
                     </div>
                 </div>
             </div>

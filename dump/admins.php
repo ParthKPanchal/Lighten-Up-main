@@ -31,13 +31,31 @@ if(isset($_POST['delete'])){
 <head>
   <title>Lighten Up - Admins</title>
   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Bootstrap -->
+  <meta name="author" content="Gemplyte IT Solutions">
+  <meta name="keywords" content="Lighten Up,Gemplyte,Sample Project">
+  <meta name="description" content="Gemplyte Sample Project">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="image/logo/title.png" type="image/x-icon">
+
+  <!-- Bootstrap Icons & CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
   <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="../css/loader.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-banner.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-product.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-about.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-contact.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-categories.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-view-product.css">
   <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
 <body>
@@ -45,17 +63,21 @@ if(isset($_POST['delete'])){
 
 <section class="container-fluid px-5 my-5">
   <h1 class="text-center fw-bold mb-5">
-  <i class="bi bi-shield-lock-fill text-dark"></i> Manage Admins
-</h1>
+    <i class="bi bi-shield-lock-fill text-dark"></i> Manage Admins
+  </h1>
 
 
   <!-- Search Form -->
-  <form action="" method="POST" class="d-flex justify-content-center mb-5">
-    <input type="text" name="search_box" placeholder="Search admins..." maxlength="100" 
-           class="form-control w-50 me-2" required>
-    <button type="submit" class="btn btn-dark" name="search_btn">
-      <i class="bi bi-search"></i> Search
-    </button>
+  <form action="" method="POST" class="row g-2 mb-5 justify-content-center">
+    <div class="col">
+    <input type="text" name="search_box" placeholder="Search admins..." 
+           class="form-control" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-dark" name="search_btn">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
   </form>
 
   <?php

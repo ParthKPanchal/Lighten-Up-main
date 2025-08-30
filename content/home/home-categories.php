@@ -1,6 +1,6 @@
 <section class="our-categories py-5" id="our-categories">
   <div class="container-fluid px-5 text-center">
-      <h3 class=" text-center fw-bold">Our categoriess</h3>
+      <h1 class="text-center fw-bold">Our categoriess</h1>
     <div class="row align-items-center justify-content-center g-4">
       
       <div class="col-lg-3 col-md-6 col-sm-12 text-center">

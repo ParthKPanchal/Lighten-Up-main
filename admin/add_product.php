@@ -125,127 +125,43 @@ if (isset($_POST['add_product'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Lighten Up - Add Product</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-<link rel="stylesheet" type="text/css" href="css/loader.css" />
-<link rel="stylesheet" type="text/css" href="css/navbar.css" />
-<link rel="stylesheet" type="text/css" href="css/banner.css" />
-<link rel="stylesheet" type="text/css" href="../css/style.css" />
-<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Meta -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Gemplyte IT Solutions" />
+  <meta name="keywords" content="Lighten Up, Gemplyte, Sample Project" />
+  <meta name="description" content="Gemplyte Sample Project" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../asset/image/logo/title.png" type="image/x-icon" />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/loader.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/admin_navbar.css">
+  <link rel="stylesheet" href="../css/banner.css">
+  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="../css/categories.css">
+  <link rel="stylesheet" href="../css/show-product.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
-
-<section class="add-product container py-5">
-  <h1 class="mb-4 text-center fw-bold">
-  <i class="bi bi-box-seam-fill text-dark"></i> Add Product
-</h1>
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10">
-        <div class="bg-white p-4 p-md-5 rounded-4 shadow-sm form-card animate-fade-up">
-          <form action="" method="POST" enctype="multipart/form-data">
-            <div class="row g-4">
-              <!-- Image 01 -->
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Main Image 1</label>
-                <input type="file" class="form-control" id="image_01" name="image_01" accept="image/*" required />
-              </div>
-              <!-- Image 01 -->
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Main Image 2</label>
-                <input type="file" class="form-control" id="image_02" name="image_02" accept="image/*" required />
-              </div>
-              <!-- Image 01 -->
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Main Image 3</label>
-                <input type="file" class="form-control" id="image_03" name="image_03" accept="image/*" required />
-              </div>
-              <div class="col-md-6">
-                <label for="product_name" class="form-label fw-semibold">Product Name</label>
-                <input type="text" class="form-control" id="product_name" name="product_name" required/>
-              </div>
-              <div class="col-md-6">
-                <label for="product_price" class="form-label fw-semibold">Product Price</label>
-                <input type="text" class="form-control" id="product_price" name="product_price" required/>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Select Category</label>
-                <select class="form-select" name="category" required>
-                  <option disabled selected>Select Category</option>
-                  <option value="Fan">Fan</option>
-                  <option value="Light">Light</option>
-                  <option value="Switch">Switch</option>
-                  <option value="Wire">Wire</option>
-                </select>
-              </div>
-
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Select Color</label>
-                <select class="form-select" name="color">
-                  <option disabled selected>Color</option>
-                  <option>Red</option><option>Blue</option><option>Yellow</option><option>Brown</option>
-                  <option>Green</option><option>Black</option><option>White</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Select Size</label>
-                <select class="form-select" name="size">
-                  <option disabled selected>Select Size</option>
-                  <option>48</option><option>56</option><option>60</option>
-                </select>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Brand</label>
-                <input type="text" class="form-control" id="product_brand" name="product_brand" required/>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Material</label>
-                <input type="text" class="form-control" id="product_material" name="product_material" required/>
-              </div>
-              <div class="col-md-4">
-                <label class="form-label fw-semibold">Manufacturer</label>
-                <input type="text" class="form-control" id="product_manufacturer" name="product_manufacturer" required/>
-              </div>
-              <div class="col-md-6">
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="available" name="available">
-                  <label class="form-check-label">Available both online and in-store</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="rated" name="rated">
-                  <label class="form-check-label">Highly rated by customers</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="installation" name="installation">
-                  <label class="form-check-label">Includes installation and support</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="warranty" name="warranty">
-                  <label class="form-check-label">Comes with warranty</label>
-                </div>
-              </div>
-            <div class="mt-5">
-              <button type="submit" class="btn btn-dark w-100 btn-lg shadow-sm" name="add_product">
-                Add Product Now!
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-</section>
-
+<?php include __DIR__ . '/../content/admin/add_product/add_product.php'; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

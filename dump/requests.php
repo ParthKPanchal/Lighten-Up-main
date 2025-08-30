@@ -1,11 +1,13 @@
 <?php
-include 'connect.php';
+// Secure include
+include '../connect.php';
 
-if(isset($_COOKIE['user_id'])){
-   $user_id = $_COOKIE['user_id'];
+if(isset($_COOKIE['admin_id'])){
+   $admin_id = $_COOKIE['admin_id'];
 }else{
-   $user_id = '';
+   $admin_id = '';
    header('location:login.php');
+   exit;
 }
 if(isset($_POST['delete'])){
   $delete_id=$_POST['request_id'];
@@ -22,12 +24,11 @@ if(isset($_POST['delete'])){
     $warning_msg[] = 'Request deleted already!';
   }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Lighten Up - View Product</title>
+  <title>Lighten Up - Request Received</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,23 +48,23 @@ if(isset($_POST['delete'])){
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="css/loader.css">
-  <link rel="stylesheet" type="text/css" href="css/home-banner.css">
-  <link rel="stylesheet" type="text/css" href="css/home-product.css">
-  <link rel="stylesheet" type="text/css" href="css/home-about.css">
-  <link rel="stylesheet" type="text/css" href="css/home-contact.css">
-  <link rel="stylesheet" type="text/css" href="css/home-categories.css">
-  <link rel="stylesheet" type="text/css" href="css/home-view-product.css">
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="../css/loader.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-banner.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-product.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-about.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-contact.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-categories.css">
+  <link rel="stylesheet" type="text/css" href="../css/home-view-product.css">
+  <link rel="stylesheet" type="text/css" href="../css/style.css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body style="background-image: url('/image/bg/bg.jpg'); background-size: cover;">
+<body>
 
-  <?php include "components/navbar.php"; ?>
+  <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
   <!-- request section start here -->
   <section class="request py-5">
     <div class="container-fluid px-5">
@@ -73,7 +74,7 @@ if(isset($_POST['delete'])){
       <div class="row g-4">
         <?php
           $select_requests=$conn->prepare("SELECT * FROM `requests` WHERE receiver =? ORDER BY date DESC");
-          $select_requests->execute([$user_id]);
+          $select_requests->execute([$admin_id]);
           if($select_requests->rowCount()>0){
               while($fetch_requests=$select_requests->fetch(PDO::FETCH_ASSOC)){
                   $select_sender=$conn->prepare("SELECT * FROM `users` WHERE id=?");
@@ -138,13 +139,11 @@ if(isset($_POST['delete'])){
   </section>
   <!-- request section end here -->
 
-  <?php include "components/footer.php"; ?>
-
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <script src="js/script.js"></script>
 
-  <?php include 'components/message.php'; ?>
+  <?php include '../components/message.php'; ?>
 </body>
 </html>

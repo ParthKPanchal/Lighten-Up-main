@@ -65,80 +65,46 @@ if(isset($_POST['place_order'])){
 <html>
 <head>
   <title>Lighten Up - Checkout</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="shortcut icon" href="image/logo/title.png" type="image/x-icon" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <!-- Meta -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Gemplyte IT Solutions" />
+  <meta name="keywords" content="Lighten Up, Gemplyte, Sample Project" />
+  <meta name="description" content="Gemplyte Sample Project" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="asset/image/logo/title.png" type="image/x-icon" />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/loader.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/banner.css">
+  <link rel="stylesheet" href="css/search.css">
+  <link rel="stylesheet" href="css/categories.css">
+  <link rel="stylesheet" href="css/show-product.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-<?php include "components/navbar.php"; ?>
-<section class="container-fulid p-5">
+  <!-- Navbar section here  -->
+  <?php include "components/navbar.php"; ?>
 
-  <h2 class="mb-4 fw-bold text-center">🛍️ Checkout</h2>
+  <!-- categories section here -->
+  <?php include "content/checkout/checkout.php"; ?>
 
-  <?php if($cart_items): ?>
-    <!-- Order Summary Card -->
-    <div class="card shadow-sm border-0 mb-4">
-      <div class="card-header bg-dark text-white fw-bold">
-        Order Summary
-      </div>
-      <ul class="list-group list-group-flush">
-        <?php foreach($cart_items as $item): ?>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <span><?= htmlspecialchars($item['product_name']) ?> <small class="text-muted">(x<?= $item['quantity'] ?>)</small></span>
-            <span class="fw-semibold text-success">₹<?= number_format($item['_line_total'], 2) ?></span>
-          </li>
-        <?php endforeach; ?>
-        <li class="list-group-item d-flex justify-content-between fw-bold">
-          <span>Total</span>
-          <span class="text-primary">₹<?= number_format($total_price, 2) ?></span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- Checkout Form -->
-    <div class="card shadow-sm border-0 p-4">
-      <h5 class="fw-bold mb-3">Delivery Details</h5>
-      <form method="POST">
-        <div class="mb-3">
-          <label class="form-label">Delivery Address</label>
-          <textarea name="address" class="form-control" rows="3" placeholder="Enter your full delivery address..." required></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label class="form-label">Payment Method</label>
-          <select name="payment" class="form-select" required>
-            <option value="COD">💵 Cash on Delivery</option>
-            <option value="UPI">📱 UPI</option>
-            <option value="Card">💳 Credit/Debit Card</option>
-          </select>
-        </div>
-
-        <div class="text-center mt-4">
-          <button type="submit" name="place_order" class="btn btn-lg btn-dark px-5 shadow-sm rounded-3">
-            <i class="bi bi-check-circle"></i> Place Order
-          </button>
-        </div>
-      </form>
-    </div>
-
-  <?php else: ?>
-    <!-- Empty Checkout -->
-    <div class="text-center py-5">
-      <img src="asset/image/empty-cart.png" alt="No Items" class="img-fluid mb-4" style="max-width:220px;">
-      <h4 class="fw-bold mb-3">No items to checkout</h4>
-      <p class="text-muted mb-4">Your cart is empty. Add some products before proceeding to checkout.</p>
-      <a href="index.php" class="btn btn-lg btn-warning shadow-sm rounded-pill">
-        <i class="bi bi-shop"></i> Start Shopping
-      </a>
-    </div>
-  <?php endif; ?>
-</section>
-
-
-<?php include "components/footer.php"; ?>
+  <!-- Footer section here -->
+  <?php include "components/footer.php"; ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <?php include 'components/message.php'; ?>

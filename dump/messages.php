@@ -30,18 +30,37 @@ if (isset($_POST['delete'])) {
 <html lang="en">
 <head>
   <title>Lighten Up - Admin Messages</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Meta -->
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="author" content="Gemplyte IT Solutions" />
+  <meta name="keywords" content="Lighten Up, Gemplyte, Sample Project" />
+  <meta name="description" content="Gemplyte Sample Project" />
 
   <!-- Favicon -->
-  <link rel="shortcut icon" href="../image/logo/title.png" type="image/x-icon">
+  <link rel="shortcut icon" href="../asset/image/logo/title.png" type="image/x-icon" />
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
+  <link rel="stylesheet" href="../css/loader.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/banner.css">
+  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="../css/categories.css">
+  <link rel="stylesheet" href="../css/show-product.css">
+  <link rel="stylesheet" href="../css/style.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <?php include __DIR__ . '/../components/admin_navbar.php'; ?>
@@ -53,12 +72,23 @@ if (isset($_POST['delete'])) {
 
 
   <!-- Search Form -->
-  <form action="" method="POST" class="d-flex justify-content-center mb-5">
+  <!-- <form action="" method="POST" class="d-flex justify-content-center mb-5">
     <input type="text" name="search_box" placeholder="Search messages..." 
            class="form-control w-50 me-2" maxlength="100" required>
     <button type="submit" class="btn btn-dark" name="search_btn">
       <i class="bi bi-search"></i> Search
     </button>
+  </form> -->
+  <form action="" method="POST" class="d-flex justify-content-center mb-5">
+    <div class="col">
+      <input type="text" name="search_box" placeholder="Search messages..." 
+            class="form-control w-100" maxlength="100" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-dark ms-2" name="search_btn">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
   </form>
 
   <div class="row g-4">
