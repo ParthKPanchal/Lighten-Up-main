@@ -63,12 +63,23 @@ if (isset($_POST['delete_product'])) {
   <i class="bi bi-bag-check-fill text-dark"></i> My Products
 </h1>
     <!-- Search -->
-    <form action="" method="POST" class="d-flex mb-4">
+    <!-- <form action="" method="POST" class="d-flex mb-4">
         <input type="text" name="search_box" class="form-control" placeholder="Search product..."
                value="<?= isset($_POST['search_box']) ? htmlspecialchars($_POST['search_box']) : '' ?>">
         <button type="submit" name="search_btn" class="btn btn-dark ms-2">
             <i class="bi bi-search"></i>
         </button>
+    </form> -->
+    <form action="" method="POST" class="row g-2 mb-4 justify-content-center">
+        <div class="col">
+            <input type="text" name="search_box" class="form-control" placeholder="Search product..."
+                value="<?= isset($_POST['search_box']) ? htmlspecialchars($_POST['search_box']) : '' ?>">
+        </div>
+        <div class="col-auto">
+            <button type="submit" name="search_btn" class="btn btn-dark w-100">
+            <i class="bi bi-search"></i> Search
+            </button>
+        </div>
     </form>
 
     <div class="row g-4">

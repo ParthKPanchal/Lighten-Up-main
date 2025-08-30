@@ -20,7 +20,7 @@
         <h5 class="mb-3">Quick Links</h5>
         <ul class="list-unstyled">
           <li><a href="index.php" class="text-dark text-decoration-none d-block mb-2">Home</a></li>
-          <li><a href="index.php#product" class="text-dark text-decoration-none d-block mb-2">Products</a></li>
+          <li><a href="shop.php" class="text-dark text-decoration-none d-block mb-2">Products</a></li>
           <li><a href="about.php" class="text-dark text-decoration-none d-block mb-2">About Us</a></li>
           <li><a href="terms-and-conditions.php" class="text-dark text-decoration-none d-block mb-2">Terms & Conditions</a></li>
           <li><a href="contact.php" class="text-dark text-decoration-none d-block">Contact Us</a></li>

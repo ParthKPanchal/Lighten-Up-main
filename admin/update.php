@@ -15,39 +15,38 @@ $select_profile->execute([$admin_id]);
 $fetch_profile = $select_profile->fetch(PDO::FETCH_ASSOC);
 
 // update user details
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
-  $name = $_POST['name'];
-  $name = filter_var($name, FILTER_SANITIZE_STRING); 
-   
-  if(!empty($name)){
-    $update_name = $conn->prepare("UPDATE `admins` SET name = ? WHERE id = ?");
-    $update_name->execute([$name, $admin_id]);
-    $success_msg[] = 'Name updated successfully!';
-  }
+    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
 
-$empty_pass = sha1('');
-$prev_pass = $fetch_profile['password'];
+    if (!empty($name)) {
+        $update_name = $conn->prepare("UPDATE `admins` SET name = ? WHERE id = ?");
+        $update_name->execute([$name, $admin_id]);
+        $success_msg[] = 'Name updated successfully!';
+    }
 
-$old_pass = sha1($_POST['old_pass']);
-$new_pass = sha1($_POST['new_pass']);
-$c_pass   = sha1($_POST['c_pass']);
+    $old_pass = $_POST['old_pass'];
+    $new_pass = $_POST['new_pass'];
+    $c_pass   = $_POST['c_pass'];
 
-if ($old_pass != $empty_pass || $new_pass != $empty_pass || $c_pass != $empty_pass) {
-    
-    if ($old_pass != $prev_pass) {
-        $warning_msg[] = 'Old password is incorrect!';
-    } elseif ($new_pass != $c_pass) {
-        $warning_msg[] = 'Confirm password does not match!';
-    } elseif ($new_pass == $empty_pass) {
-        $warning_msg[] = 'Please enter a new password!';
-    } else {
-        $update_pass = $conn->prepare("UPDATE `admins` SET password = ? WHERE id = ?");
-        $update_pass->execute([$new_pass, $admin_id]);
-        $success_msg[] = 'Password updated successfully!';
+    // Only run password update if all 3 fields are filled
+    if (!empty($old_pass) && !empty($new_pass) && !empty($c_pass)) {
+
+        $prev_pass = $fetch_profile['password']; // hashed password from DB
+
+        if (!password_verify($old_pass, $prev_pass)) {
+            $warning_msg[] = 'Old password is incorrect!';
+        } elseif ($new_pass !== $c_pass) {
+            $warning_msg[] = 'Confirm password does not match!';
+        } else {
+            $hashed_new_pass = password_hash($new_pass, PASSWORD_DEFAULT);
+            $update_pass = $conn->prepare("UPDATE `admins` SET password = ? WHERE id = ?");
+            $update_pass->execute([$hashed_new_pass, $admin_id]);
+            $success_msg[] = 'Password updated successfully!';
+        }
     }
 }
-}
+
 
 ?>
 

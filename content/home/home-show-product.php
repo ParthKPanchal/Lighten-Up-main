@@ -10,9 +10,9 @@
         if($select_products->rowCount() > 0){
           while($fetch_products = $select_products->fetch(PDO::FETCH_ASSOC)){
 
-            $select_users = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-            $select_users->execute([$fetch_products['user_id']]);
-            $fetch_user = $select_users->fetch(PDO::FETCH_ASSOC);
+            $select_admins = $conn->prepare("SELECT * FROM `admins` WHERE id = ?");
+            $select_admins->execute([$fetch_products['admin_id']]);
+            $fetch_user = $select_admins->fetch(PDO::FETCH_ASSOC);
 
             $image_count_02 = !empty($fetch_products['image_02']) ? 1 : 0;
             $image_count_03 = !empty($fetch_products['image_03']) ? 1 : 0;
@@ -53,7 +53,7 @@
 
             <!-- Card Body -->
             <div class="card-body d-flex flex-column">
-              <div class="d-flex align-items-center mb-3">
+              <div class="d-flex align-items-center mb-3"> 
                 <?php if($fetch_user): ?>
                   <div class="bg-dark text-white rounded-circle d-flex align-items-center justify-content-center" style="width:40px; height:40px; font-weight:bold;">
                     <?= (substr($fetch_user['name'], 0, 1)); ?>
@@ -100,7 +100,7 @@
 
     <!-- View All -->
     <div class="mt-5 text-center">
-      <a href="listings.php" class="btn btn-lg btn-dark px-5">View All</a>
+      <a href="shop.php" class="btn btn-lg btn-dark px-5">View All</a>
     </div>
   </div>
 </section>

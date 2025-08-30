@@ -1,6 +1,5 @@
 <!-- About Section -->
-<section class="py-5 bg-light" id="about">
-  <div class="container-fluid px-5">
+  <section class="container-fluid px-5 py-5" id="about">
 
     <!-- Title -->
     <div class="text-center mb-5">
@@ -179,6 +178,4 @@
         <span class="carousel-control-next-icon bg-dark rounded-circle p-3"></span>
       </button>
     </div>
-
-  </div>
 </section>

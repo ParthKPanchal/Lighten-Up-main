@@ -48,7 +48,7 @@
   </style>
 
   <!-- Navbar -->
-<nav class="navbar navbar-light bg-light shadow">
+<nav class="navbar navbar-light bg-light shadow sticky-top">
   <div class="container-fluid">
     <button class="btn btn-outline-dark" id="sidebarToggle">
       <i class="bi bi-list"></i>
@@ -68,6 +68,7 @@
     <li class="nav-item"><a href="dashboard.php" class="nav-link"><i class="bi bi-speedometer2"></i> Home</a></li>
     <li class="nav-item"><a href="add_product.php" class="nav-link"><i class="bi bi-box"></i> Add Product</a></li>
     <li class="nav-item"><a href="my_product.php" class="nav-link"><i class="bi bi-bag"></i> My Product</a></li>
+    <li class="nav-item"><a href="requests.php" class="nav-link"><i class="bi bi-people"></i> Request</a></li>
     <li class="nav-item"><a href="users.php" class="nav-link"><i class="bi bi-people"></i> Users</a></li>
     <li class="nav-item"><a href="admins.php" class="nav-link"><i class="bi bi-shield-lock"></i> Admins</a></li>
     <li class="nav-item"><a href="messages.php" class="nav-link"><i class="bi bi-envelope"></i> Messages</a></li>

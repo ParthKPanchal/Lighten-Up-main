@@ -29,11 +29,9 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
             <li><a class="dropdown-item" href="shop.php">View all product</a></li>
-            <li><a class="dropdown-item" href="search.php">Search product</a></li>
             <?php if($user_id != '') { ?>
-              <li><a class="dropdown-item" href="search.php">Search product</a></li>
-              <li><a class="dropdown-item" href="my-product.php">My product</a></li>
-              <li><a class="dropdown-item" href="add_product.php">Add product</a></li>
+              <li><a class="dropdown-item" href="activity.php">My Activity</a></li>
+              <li><a class="dropdown-item" href="cart.php">My Cart</a></li>
             <?php } ?>
           </ul>
         </li>
@@ -57,10 +55,12 @@
             Account <i class="fa-solid fa-chevron-down"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
-            <li><a class="dropdown-item" href="login.php">Login</a></li>
-            <li><a class="dropdown-item" href="register.php">Register</a></li>
-            <?php if($user_id != '') { ?>
-              <li><a class="dropdown-item" href="dashboard.php">Dashboard</a></li>
+            <?php if($user_id == '') { ?>
+              <!-- Show when NOT logged in -->
+              <li><a class="dropdown-item" href="login.php">Login</a></li>
+              <li><a class="dropdown-item" href="register.php">Register</a></li>
+            <?php } else { ?>
+              <!-- Show when logged in -->
               <li><a class="dropdown-item" href="update.php">Update</a></li>
               <li>
                 <a class="dropdown-item" href="logout.php" onclick="return confirm('Logout from this website?');">

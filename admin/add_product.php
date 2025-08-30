@@ -18,6 +18,8 @@ if (isset($_POST['add_product'])) {
   $product_name  = filter_var($product_name , FILTER_SANITIZE_STRING);
   $product_price = $_POST['product_price'];
   $product_price = filter_var($product_price, FILTER_SANITIZE_STRING);
+  $category = $_POST['category'];
+  $category = filter_var($category, FILTER_SANITIZE_STRING);
   $color  = $_POST['color'];
   $color  = filter_var($color , FILTER_SANITIZE_STRING);
   $size = $_POST['size'];
@@ -98,15 +100,26 @@ if (isset($_POST['add_product'])) {
    $image_01_size = $_FILES['image_01']['size'];
    $image_01_folder = '../uploaded_files/'.$rename_image_01;
 
+   if(!empty($image_01)){
    if($image_01_size > 2000000){
-      $warning_msg[] = 'image 01 size too large!';
+      $warning_msg[] = 'Image 01 size too large!';
    }else{
-      $insert_product = $conn->prepare("INSERT INTO `products`(id, admin_id, product_name, product_price, color, size, product_brand, product_material, product_manufacturer, available, rated, installation, warranty, image_01, image_02, image_03) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"); 
-      $insert_product->execute([$id, $admin_id, $product_name, $product_price, $color, $size, $product_brand, $product_material, $product_manufacturer, $available, $rated, $installation, $warranty, $rename_image_01, $rename_image_02, $rename_image_03]);
-      move_uploaded_file($image_01_tmp_name, $image_01_folder);
+      move_uploaded_file($image_01_tmp_name, $image_01_folder); // ✅ Missing in your code
+
+      $insert_product = $conn->prepare("INSERT INTO `products` 
+        (id, admin_id, product_name, product_price, color, size, product_brand, product_material, product_manufacturer, available, rated, installation, warranty, category, image_01, image_02, image_03) 
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+      $insert_product->execute([
+        $id, $admin_id, $product_name, $product_price, $color, $size, 
+        $product_brand, $product_material, $product_manufacturer, 
+        $available, $rated, $installation, $warranty, $category, 
+        $rename_image_01, $rename_image_02, $rename_image_03
+      ]);
+
       $success_msg[] = 'Product posted successfully!';
    }
-
+}
 }
 ?>
 <!DOCTYPE html>
@@ -160,7 +173,18 @@ if (isset($_POST['add_product'])) {
                 <label for="product_price" class="form-label fw-semibold">Product Price</label>
                 <input type="text" class="form-control" id="product_price" name="product_price" required/>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
+                <label class="form-label fw-semibold">Select Category</label>
+                <select class="form-select" name="category" required>
+                  <option disabled selected>Select Category</option>
+                  <option value="Fan">Fan</option>
+                  <option value="Light">Light</option>
+                  <option value="Switch">Switch</option>
+                  <option value="Wire">Wire</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
                 <label class="form-label fw-semibold">Select Color</label>
                 <select class="form-select" name="color">
                   <option disabled selected>Color</option>
@@ -168,7 +192,7 @@ if (isset($_POST['add_product'])) {
                   <option>Green</option><option>Black</option><option>White</option>
                 </select>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <label class="form-label fw-semibold">Select Size</label>
                 <select class="form-select" name="size">
                   <option disabled selected>Select Size</option>

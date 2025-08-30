@@ -1,8 +1,6 @@
 <?php
 include 'connect.php';
 
-echo create_unique_id();
-
 if(isset($_COOKIE['user_id'])) {
     $user_id = $_COOKIE['user_id'];
 } else {
@@ -52,7 +50,6 @@ include 'components/save_send.php';
 
   </head>
   <body>
-    
       <?php include "components/navbar.php"; ?>
       <?php include "content/about/about.php"; ?>
       <?php include "components/footer.php"; ?>

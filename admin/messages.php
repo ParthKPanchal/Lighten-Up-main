@@ -53,12 +53,23 @@ if (isset($_POST['delete'])) {
 
 
   <!-- Search Form -->
-  <form action="" method="POST" class="d-flex justify-content-center mb-5">
+  <!-- <form action="" method="POST" class="d-flex justify-content-center mb-5">
     <input type="text" name="search_box" placeholder="Search messages..." 
            class="form-control w-50 me-2" maxlength="100" required>
     <button type="submit" class="btn btn-dark" name="search_btn">
       <i class="bi bi-search"></i> Search
     </button>
+  </form> -->
+  <form action="" method="POST" class="d-flex justify-content-center mb-5">
+    <div class="col">
+      <input type="text" name="search_box" placeholder="Search messages..." 
+            class="form-control w-100" maxlength="100" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-dark ms-2" name="search_btn">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </div>
   </form>
 
   <div class="row g-4">

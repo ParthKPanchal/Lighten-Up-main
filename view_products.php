@@ -20,7 +20,7 @@ include 'components/save_send.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Lighten Up - Dashboard</title>
+  <title>Lighten Up - View Products</title>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,9 +59,9 @@ include 'components/save_send.php';
   <?php include "components/navbar.php"; ?>
 
   <!-- view product section -->
-  <section class="view-product mt-5 py-5" id="white-view-product">
+  <section class="view-product py-5" id="white-view-product">
     <div class="container">
-      <h1 class="text-center">Property Details</h1>
+      <h1 class="text-center fw-bold">Property Details</h1>
       <div class="row g-5 align-items-start">
         
         <!-- 🖼️ Product Image Carousel -->
@@ -75,7 +75,7 @@ include 'components/save_send.php';
                 $product_id = $fetch_product['id'];
 
                 $select_user = $conn->prepare("SELECT * FROM `users` WHERE id = ?");
-                $select_user->execute([$fetch_product['user_id']]);
+                $select_user->execute([$fetch_product['admin_id']]);
                 $fetch_user = $select_user->fetch(PDO::FETCH_ASSOC);
 
                 $select_saved = $conn->prepare("SELECT * FROM `saved` WHERE product_id = ? and user_id = ?");

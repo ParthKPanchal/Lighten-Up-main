@@ -28,10 +28,10 @@ if(isset($_POST['send'])){
       $product_id = $_POST['product_id'];
       $product_id = filter_var($product_id, FILTER_SANITIZE_STRING);
 
-      $select_receiver = $conn->prepare("SELECT user_id FROM `products` WHERE id = ? LIMIT 1");
+      $select_receiver = $conn->prepare("SELECT admin_id FROM `products` WHERE id = ? LIMIT 1");
       $select_receiver->execute([$product_id]);
       $fetch_receiver = $select_receiver->fetch(PDO::FETCH_ASSOC);
-      $receiver = $fetch_receiver['user_id'];
+      $receiver = $fetch_receiver['admin_id'];
 
       $verify_request = $conn->prepare("SELECT * FROM `requests` WHERE product_id = ? AND sender = ? AND receiver = ?");
       $verify_request->execute([$product_id, $user_id, $receiver]);
